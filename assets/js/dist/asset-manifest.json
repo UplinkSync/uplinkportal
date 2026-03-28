@@ -1,0 +1,30 @@
+{
+	"admin-backend.js": {
+		"file": "dist/admin-backend.min.js",
+		"hash": "95f71622"
+	},
+	"admin-configuration.js": {
+		"file": "dist/admin-configuration.min.js",
+		"hash": "24e69c80"
+	},
+	"admin-dashboard.js": {
+		"file": "dist/admin-dashboard.min.js",
+		"hash": "307c3ba8"
+	},
+	"admin-modules.js": {
+		"file": "dist/admin-modules.min.js",
+		"hash": "c09e7592"
+	},
+	"admin-onboarding.js": {
+		"file": "dist/admin-onboarding.min.js",
+		"hash": "5e667879"
+	},
+	"admin-validation.js": {
+		"file": "dist/admin-validation.min.js",
+		"hash": "e91021f9"
+	},
+	"portal.js": {
+		"file": "dist/portal.min.js",
+		"hash": "48ecfed6"
+	}
+}

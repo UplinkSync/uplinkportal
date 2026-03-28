@@ -1,0 +1,14 @@
+{
+  "name": "uplinkportal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "JS asset bundling and minification for UplinkPortal public core",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "lint": "echo 'Add asset linting in future public-core-safe commits if needed.'"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

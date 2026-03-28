@@ -1,0 +1,8 @@
+include:
+  - local: '/.gitlab/ci/wordpress-plugin.yml'
+
+variables:
+  VAULT_ROLE: "wp-plugin-uplinkportal"
+  GITHUB_ORG: "irwindoug"
+  GITHUB_REPO: "uplinkportal"
+  SQUASH_COMMIT_PREFIX: "release"

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<ruleset name="UplinkPortal">
+  <description>PHP_CodeSniffer rules for UplinkPortal.</description>
+
+  <file>../uplinkportal.php</file>
+  <file>../includes</file>
+  <file>../src</file>
+  <file>../tests</file>
+
+  <arg name="basepath" value=".."/>
+  <arg name="parallel" value="4"/>
+  <arg value="sp"/>
+
+  <config name="testVersion" value="8.3-"/>
+
+  <rule ref="WordPress-Core"/>
+  <rule ref="WordPress-Docs"/>
+  <rule ref="WordPress-Extra"/>
+
+  <rule ref="WordPress.Files.FileName">
+    <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+    <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+  </rule>
+
+  <rule ref="WordPress.WP.Capabilities">
+    <properties>
+      <property name="custom_capabilities" type="array">
+        <element value="client_access"/>
+        <element value="msp_manage"/>
+        <element value="client_view_billing"/>
+        <element value="client_view_tickets"/>
+        <element value="client_view_subscriptions"/>
+        <element value="client_ticket_create_own"/>
+        <element value="client_ticket_view_own"/>
+        <element value="client_kb_access"/>
+        <element value="msp_manage_owner_permissions"/>
+        <element value="msp_manage_non_owner_permissions"/>
+        <element value="msp_preview_client_portal"/>
+        <element value="msp_view_operations_dashboard"/>
+        <element value="msp_view_executive_dashboard"/>
+        <element value="msp_view_financial_dashboard"/>
+        <element value="msp_view_technician_dashboard"/>
+      </property>
+    </properties>
+  </rule>
+
+  <exclude-pattern>../vendor/*</exclude-pattern>
+
+  <!-- Test bootstrap and stub files legitimately mix functions and OO declarations. -->
+  <rule ref="Universal.Files.SeparateFunctionsFromOO">
+    <exclude-pattern>../tests/*</exclude-pattern>
+  </rule>
+  <rule ref="Generic.Files.OneObjectStructurePerFile">
+    <exclude-pattern>../tests/*</exclude-pattern>
+  </rule>
+
+  <!-- Test stubs must use native PHP equivalents of WP functions. -->
+  <rule ref="WordPress.WP.AlternativeFunctions">
+    <exclude-pattern>../tests/config/*</exclude-pattern>
+  </rule>
+
+  <!-- Test stubs, test files, and UI renderer classes may have unused parameters
+       for forward-compatible template method signatures. -->
+  <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+    <exclude-pattern>../tests/*</exclude-pattern>
+    <exclude-pattern>../src/Admin/UI/*</exclude-pattern>
+  </rule>
+
+  <!-- Test files use native PHP filesystem calls for test setup/teardown. -->
+  <rule ref="WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents">
+    <exclude-pattern>../tests/*</exclude-pattern>
+  </rule>
+  <rule ref="WordPress.WP.AlternativeFunctions.unlink_unlink">
+    <exclude-pattern>../tests/*</exclude-pattern>
+  </rule>
+</ruleset>

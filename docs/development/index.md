@@ -1,0 +1,18 @@
+# Development
+
+- [Architecture](architecture.md)
+- [Permission Enforcement Boundary](permission-enforcement-boundary.md)
+- [Deployment Security Guide](deployment-security-guide.md)
+- [Multisite Deployment](multisite-deployment.md)
+- [Local Development](local-dev.md)
+- [Contributing](contributing.md)
+- [Local QA Checklist](local-qa-checklist.md)
+- [CI Notes](ci.md)
+- [WP-CLI Diagnostics Evaluation](wp-cli-diagnostics-evaluation.md)
+- [Changelog Workflow](changelog-workflow.md)
+- [Release Checklist](release-checklist.md)
+- [AI Agent Instructions](../../AGENTS.md)
+- [Project TODO](project-todo.md)
+- [Integration Compliance Migration Plan](integration-compliance-migration-plan.md)
+- [Centralized Monitoring Design](centralized-monitoring-design.md)
+- [Backend Observability Contract](backend-observability-contract.md)

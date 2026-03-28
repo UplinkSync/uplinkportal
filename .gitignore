@@ -1,0 +1,63 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE local files
+.idea/
+*.code-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/cspell.json
+
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa
+id_ed25519
+
+# Composer
+/vendor/
+composer.phar
+
+# Node / npm
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build and cache artifacts
+/dist/
+/build/
+*.log
+*.tmp
+*.cache
+
+# PHPUnit / coverage
+/tests/.phpunit.result.cache
+/coverage/
+coverage.xml
+clover.xml
+junit.xml
+
+# PHPCS / static analysis cache
+/.phpcs-cache
+/phpstan.neon.cache
+
+# WordPress local runtime artifacts (if used in local testing)
+/wp-content/debug.log
+
+# Worker artifacts
+infrastructure/worker/node_modules/
+infrastructure/worker/.wrangler/
+
+# Internal planning and human-step documents (not for public commit)
+docs/development/project-todo.md
+HUMAN_INSTRUCTIONS.md

@@ -1,0 +1,3325 @@
+.uplinkportal-admin,
+.msp-admin {
+	--msp-space-1: 4px;
+	--msp-space-2: 8px;
+	--msp-space-3: 12px;
+	--msp-space-4: 16px;
+	--msp-space-5: 24px;
+	--msp-space-6: 32px;
+	--msp-radius: 10px;
+	--msp-border: #d8dde6;
+	--msp-surface: #ffffff;
+	--msp-surface-muted: #f8f9ff;
+	--msp-text: #111827;
+	--msp-text-muted: #5b6473;
+	--msp-accent: #4f46e5;
+	--msp-accent-strong: #4338ca;
+	--msp-accent-soft: #eef2ff;
+	--msp-accent-border: #c7d2fe;
+	--msp-violet: #7c3aed;
+	--msp-violet-soft: #f5f3ff;
+	--msp-hero-bg: #1e1b4b;
+	--msp-hero-text: #e0e7ff;
+	--uplinkportal-border: var(--msp-border);
+	--uplinkportal-muted: var(--msp-text-muted);
+	--uplinkportal-panel: var(--msp-surface);
+	--uplinkportal-panel-alt: var(--msp-surface-muted);
+	--uplinkportal-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+	--uplinkportal-accent: var(--msp-accent);
+	--uplinkportal-heading: var(--msp-text);
+	--uplinkportal-surface: var(--msp-surface);
+	/* Semantic status tokens */
+	--up-success: #16a34a;
+	--up-success-soft: #dcfce7;
+	--up-success-border: #86efac;
+	--up-warning: #d97706;
+	--up-warning-soft: #fef3c7;
+	--up-warning-border: #fcd34d;
+	--up-danger: #dc2626;
+	--up-danger-soft: #fee2e2;
+	--up-danger-border: #fca5a5;
+	/* Pro add-on brand tokens */
+	--up-pro: #7c3aed;
+	--up-pro-soft: #f5f3ff;
+	--up-pro-border: #c4b5fd;
+	--up-pro-gradient: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+	/* Interaction tokens */
+	--up-card-lift-shadow: 0 4px 14px rgba(79, 70, 229, 0.1);
+	--up-card-lift-shadow-sm: 0 2px 8px rgba(79, 70, 229, 0.08);
+	font-family: inherit;
+	color: var(--msp-text);
+	max-width: 1240px;
+}
+
+.msp-admin,
+.msp-admin *,
+.msp-admin *::before,
+.msp-admin *::after {
+	box-sizing: border-box;
+}
+
+.uplinkportal-settings-screen .nav-tab-wrapper .nav-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	line-height: 1.3;
+	border: 1px solid #c7d2fe;
+	border-bottom-color: #a5b4fc;
+	border-radius: 8px 8px 0 0;
+	background: #f8f9ff;
+	color: #1e1b4b;
+	margin: 0;
+	padding: 8px 12px;
+	text-decoration: none;
+	transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.uplinkportal-settings-screen .nav-tab-wrapper .nav-tab:hover {
+	border-color: #a5b4fc;
+	background: #eef2ff;
+	color: #1e1b4b;
+}
+
+.uplinkportal-settings-screen .nav-tab-wrapper .nav-tab.nav-tab-active {
+	border-color: #818cf8;
+	border-bottom-color: #818cf8;
+	background: #fff;
+	color: #1e1b4b;
+	box-shadow: inset 0 -2px 0 0 var(--msp-accent);
+}
+
+.uplinkportal-settings-screen .nav-tab-wrapper .nav-tab .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	vertical-align: middle;
+}
+
+.uplinkportal-admin .nav-tab-wrapper {
+	margin-top: var(--msp-space-4);
+	margin-bottom: var(--msp-space-4);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--msp-space-2);
+	border-bottom: 1px solid var(--msp-border);
+	padding-bottom: var(--msp-space-1);
+}
+
+.uplinkportal-admin-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--msp-space-3);
+	padding: var(--msp-space-3) var(--msp-space-4);
+	margin: 0 0 var(--msp-space-4);
+	border: 1px solid var(--msp-accent-border);
+	border-radius: calc(var(--msp-radius) + 2px);
+	background: var(--msp-accent-soft);
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-admin-toolbar-label {
+	margin: 0;
+	font-weight: 600;
+	color: #1e3a5f;
+}
+
+.uplinkportal-admin-toolbar-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--msp-space-2);
+}
+
+.uplinkportal-config-tabs {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: var(--msp-space-3);
+	margin: var(--msp-space-4) 0;
+}
+
+.uplinkportal-config-tab {
+	display: block;
+	padding: var(--msp-space-3);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	background: var(--msp-surface);
+	color: var(--msp-text);
+	text-decoration: none;
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-config-tab:hover {
+	border-color: #b7c0ce;
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-config-tab.is-active {
+	border-color: #93a7c8;
+	background: #f2f6fd;
+}
+
+.uplinkportal-config-tab-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin-right: var(--msp-space-2);
+	color: var(--uplinkportal-accent);
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.uplinkportal-config-tab-label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: var(--msp-space-1);
+}
+
+.uplinkportal-config-tab-desc {
+	display: block;
+	font-size: 12px;
+	color: var(--msp-text-muted);
+}
+
+.uplinkportal-admin-hero {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: var(--msp-space-5);
+	padding: var(--msp-space-5);
+	background: linear-gradient(140deg, #312e81 0%, var(--msp-hero-bg) 100%);
+	border: 1px solid #3730a3;
+	border-radius: calc(var(--msp-radius) + 2px);
+	margin: var(--msp-space-4) 0;
+	box-shadow: 0 4px 16px rgba(79, 70, 229, 0.18);
+	color: var(--msp-hero-text);
+}
+
+.uplinkportal-admin-hero h1 {
+	margin: 0 0 var(--msp-space-2);
+	font-size: 24px;
+	line-height: 1.3;
+	color: var(--msp-hero-text);
+}
+
+.uplinkportal-admin-hero p {
+	margin: 0;
+	max-width: 760px;
+	color: #a5b4fc;
+	line-height: 1.45;
+}
+
+.uplinkportal-admin-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: var(--msp-space-2) var(--msp-space-3);
+	border-radius: 999px;
+	background: var(--msp-accent-soft);
+	color: var(--msp-accent-strong);
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1;
+	border: 1px solid var(--msp-accent-border);
+}
+
+.uplinkportal-admin-card {
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: calc(var(--msp-radius) + 2px);
+	padding: var(--msp-space-5);
+	box-shadow: var(--uplinkportal-shadow);
+	margin-bottom: var(--msp-space-4);
+	overflow: visible;
+}
+
+.uplinkportal-settings-shell {
+	display: grid;
+	grid-template-columns: 300px minmax(0, 1fr);
+	gap: 14px;
+	align-items: start;
+}
+
+.uplinkportal-settings-sidebar {
+	position: sticky;
+	top: 42px;
+	padding: var(--msp-space-4);
+	border: 1px solid var(--msp-border);
+	border-radius: 14px;
+	background: var(--msp-surface);
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-settings-sidebar h2 {
+	margin: 0 0 10px;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #334155;
+}
+
+.uplinkportal-settings-screen .uplinkportal-config-tabs {
+	grid-template-columns: 1fr;
+	margin: 0;
+}
+
+.uplinkportal-settings-screen .uplinkportal-config-tab {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	align-items: start;
+	gap: 6px;
+	border-radius: 10px;
+}
+
+.uplinkportal-settings-help {
+	margin-top: var(--msp-space-3);
+	padding: var(--msp-space-3);
+	border: 1px dashed #cdd5df;
+	border-radius: 10px;
+	background: #fbfdff;
+}
+
+.uplinkportal-settings-help h3 {
+	margin: 0 0 8px;
+	font-size: 13px;
+}
+
+.uplinkportal-settings-help ol {
+	margin: 0;
+	padding-left: 18px;
+	color: #475569;
+}
+
+.uplinkportal-settings-main-header {
+	margin: 0 0 var(--msp-space-3);
+	padding: var(--msp-space-4);
+	border: 1px solid var(--msp-border);
+	border-radius: 12px;
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-settings-main-header h2 {
+	margin: 0 0 4px;
+	font-size: 20px;
+}
+
+.uplinkportal-settings-main-header p {
+	margin: 0;
+	color: var(--msp-text-muted);
+}
+
+.uplinkportal-settings-form .form-table {
+	margin-top: 0;
+}
+
+.uplinkportal-settings-form .form-table tr {
+	border-bottom: 1px solid #e8ecf2;
+}
+
+.uplinkportal-settings-form .form-table th {
+	padding-top: var(--msp-space-4);
+	vertical-align: top;
+}
+
+.uplinkportal-settings-form .form-table td {
+	padding-top: var(--msp-space-3);
+	padding-bottom: var(--msp-space-4);
+}
+
+.uplinkportal-settings-window-card {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 10px;
+	align-items: center;
+	padding: 12px;
+	border: 1px solid #dce4ee;
+	border-radius: 10px;
+	background: #f8fbff;
+}
+
+.uplinkportal-settings-window-card h4 {
+	grid-column: 1 / -1;
+	margin: 0;
+	font-size: 14px;
+}
+
+.uplinkportal-settings-window-card .description {
+	margin: 0;
+	grid-column: 1 / 2;
+}
+
+.uplinkportal-settings-window-modal .uplinkportal-settings-window-dialog {
+	width: min(960px, 94vw);
+	max-width: 960px;
+	max-height: 88vh;
+	padding: var(--msp-space-4);
+	border: 1px solid var(--msp-border);
+	border-radius: calc(var(--msp-radius) + 2px);
+	background: var(--msp-surface);
+}
+
+.uplinkportal-settings-window-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--msp-space-2);
+	margin-bottom: var(--msp-space-3);
+}
+
+.uplinkportal-settings-window-heading {
+	display: grid;
+	gap: 4px;
+}
+
+.uplinkportal-settings-window-head h3 {
+	margin: 0;
+}
+
+.uplinkportal-settings-window-heading .description {
+	margin: 0;
+}
+
+.uplinkportal-settings-window-body {
+	max-height: calc(88vh - 160px);
+	overflow: auto;
+	padding-right: var(--msp-space-1);
+}
+
+.uplinkportal-settings-window-foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--msp-space-3);
+	margin-top: var(--msp-space-3);
+	padding-top: var(--msp-space-3);
+	border-top: 1px solid #e6ebf2;
+}
+
+.uplinkportal-settings-window-foot .description {
+	margin: 0;
+}
+
+.uplinkportal-admin-card h2 {
+	margin-top: 0;
+}
+
+.uplinkportal-security-baseline-card {
+	margin-bottom: 16px;
+}
+
+.uplinkportal-stat-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 12px;
+	margin-bottom: 1rem;
+}
+
+.uplinkportal-stat-grid--tools .uplinkportal-stat-card {
+	background: #fff;
+	border-color: #cbd9e8;
+}
+
+.uplinkportal-stat-card {
+	background: var(--uplinkportal-panel);
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 12px;
+	padding: 14px;
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-stat-label {
+	margin: 0 0 8px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: #6b7280;
+}
+
+.uplinkportal-stat-value {
+	margin: 0;
+	font-size: 24px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.uplinkportal-stat-help {
+	margin: 8px 0 0;
+	font-size: 12px;
+	color: #6b7280;
+}
+
+.uplinkportal-metric-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.uplinkportal-metric-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	padding: 12px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: var(--uplinkportal-panel-alt);
+}
+
+.uplinkportal-metric-row h3 {
+	margin: 0 0 4px;
+	font-size: 15px;
+}
+
+.uplinkportal-metric-row p {
+	margin: 0;
+	color: #475569;
+}
+
+.uplinkportal-status-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2px 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	border: 1px solid transparent;
+	line-height: 1.6;
+}
+
+.uplinkportal-status-pill.is-enabled {
+	background: #edf6ef;
+	color: #1f5131;
+	border-color: #c5e1ce;
+}
+
+.uplinkportal-status-pill.is-disabled {
+	background: #f7f8fa;
+	color: #4b5565;
+	border-color: #d8dde6;
+}
+
+.uplinkportal-status-pill.is-warning {
+	background: #fdf4e8;
+	color: #8a4b20;
+	border-color: #f1d0b2;
+}
+
+.uplinkportal-status-pill--compact {
+	white-space: nowrap;
+}
+
+.uplinkportal-admin-card hr {
+	margin: 1.25rem 0;
+}
+
+.uplinkportal-integration-status-table td {
+	vertical-align: middle;
+}
+
+.uplinkportal-integration-harness-table td {
+	vertical-align: top;
+}
+
+.uplinkportal-harness-cell .description {
+	margin: 6px 0 0;
+	font-size: 12px;
+}
+
+.uplinkportal-model-policy-table input[type="text"] {
+	min-width: 140px;
+}
+
+.uplinkportal-admin .description {
+	color: var(--msp-text-muted);
+	max-width: 80ch;
+}
+
+.uplinkportal-admin .uplinkportal-tab-panel .form-table th {
+	width: 220px;
+}
+
+.uplinkportal-integration-profile-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 12px;
+}
+
+.uplinkportal-integration-wizard {
+	margin-bottom: 14px;
+	padding: 12px;
+	background: var(--uplinkportal-panel-alt);
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+}
+
+.uplinkportal-integration-wizard h3 {
+	margin: 0 0 6px;
+}
+
+.uplinkportal-integration-wizard-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 10px;
+}
+
+.uplinkportal-integration-wizard-status {
+	margin-left: 8px;
+	color: #475569;
+	font-size: 12px;
+}
+
+.uplinkportal-integration-profile-card {
+	background: var(--uplinkportal-panel-alt);
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	padding: 12px;
+}
+
+.uplinkportal-integration-profile-card h4 {
+	margin: 0 0 8px;
+}
+
+.uplinkportal-integration-profile-card .uplinkportal-admin-badge {
+	margin-left: var(--msp-space-2);
+}
+
+.uplinkportal-database-profile-panels {
+	display: grid;
+	gap: var(--msp-space-3);
+}
+
+.uplinkportal-users-config-grid {
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.uplinkportal-users-schema-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 8px;
+}
+
+.uplinkportal-users-schema-list li {
+	padding: 8px 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: #fff;
+}
+
+.uplinkportal-users-schema-list code {
+	display: inline-block;
+	margin: 3px 0;
+}
+
+.uplinkportal-module-catalog {
+	display: grid;
+	gap: var(--msp-space-4);
+}
+
+.uplinkportal-module-section {
+	padding: var(--msp-space-4);
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: calc(var(--msp-radius) + 2px);
+}
+
+.uplinkportal-module-section h3 {
+	margin-top: 0;
+	margin-bottom: var(--msp-space-2);
+}
+
+.uplinkportal-module-card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: var(--msp-space-3);
+	grid-auto-rows: auto;
+	align-items: start;
+}
+
+.uplinkportal-module-toggle {
+	padding: 12px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: #fff;
+}
+
+.uplinkportal-module-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--msp-space-3);
+	height: auto;
+	min-height: 100%;
+	min-width: 0;
+	padding: var(--msp-space-4);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	background: var(--msp-surface);
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+	overflow-wrap: anywhere;
+}
+
+.uplinkportal-module-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--msp-space-3);
+}
+
+.uplinkportal-module-card-title {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	min-width: 0;
+}
+
+.uplinkportal-icon-box {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	flex: 0 0 24px;
+	border-radius: 6px;
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-icon-box .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	vertical-align: middle;
+	color: var(--msp-accent);
+}
+
+.uplinkportal-module-card-header h4 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.uplinkportal-module-card p {
+	margin: 0;
+	color: var(--msp-text-muted);
+}
+
+.uplinkportal-module-card-controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: auto;
+	gap: var(--msp-space-2);
+}
+
+.uplinkportal-module-switch {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	font-weight: 600;
+}
+
+.uplinkportal-icon-action {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	border: none;
+	background: transparent;
+	color: var(--msp-accent);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.uplinkportal-icon-action:hover {
+	background: transparent;
+	color: var(--msp-accent-strong);
+}
+
+.uplinkportal-icon-action:focus-visible {
+	outline: 2px solid var(--msp-accent);
+	outline-offset: 2px;
+}
+
+.uplinkportal-icon-action[disabled] {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+.uplinkportal-icon-action .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	vertical-align: middle;
+	filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
+}
+
+.uplinkportal-icon-action--save {
+	color: var(--msp-accent);
+}
+
+.uplinkportal-icon-action--save:hover {
+	color: var(--msp-accent-strong);
+}
+
+.uplinkportal-close-override,
+[data-uplinkportal-close-plan-modal] {
+	color: #dc2626;
+}
+
+.uplinkportal-close-override:hover,
+[data-uplinkportal-close-plan-modal]:hover {
+	color: #b91c1c;
+}
+
+.uplinkportal-module-pro-placeholder {
+	border-style: dashed;
+}
+
+.uplinkportal-module-card--locked {
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-module-card--locked .uplinkportal-module-gear {
+	opacity: 0.6;
+}
+
+.uplinkportal-module-required-note {
+	display: inline-flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--msp-text-muted);
+}
+
+.uplinkportal-upgrade-locked {
+	padding: 10px 12px;
+	border: 1px solid #d0d4dc;
+	border-radius: 8px;
+	background: #f2f3f6;
+	color: #6b7280;
+}
+
+.uplinkportal-upgrade-locked label {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.uplinkportal-upgrade-locked .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+.uplinkportal-secret-manager-fieldset {
+	margin: 0 0 10px;
+}
+
+.uplinkportal-vault-config-panel {
+	padding: 12px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: var(--uplinkportal-panel-alt);
+}
+
+.uplinkportal-vault-config-panel p {
+	margin: 0 0 10px;
+}
+
+.uplinkportal-vault-config-panel p:last-child {
+	margin-bottom: 0;
+}
+
+.uplinkportal-vault-config-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 10px;
+}
+
+.uplinkportal-module-required-fields {
+	padding: var(--msp-space-3);
+	margin-top: var(--msp-space-2);
+	background: var(--msp-surface-muted);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+}
+
+.uplinkportal-module-window-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--msp-space-2);
+	margin-bottom: var(--msp-space-3);
+}
+
+.uplinkportal-module-window-tab.is-active {
+	background: #e8eef8;
+	border-color: #b7c5dd;
+	color: #1f2937;
+}
+
+.uplinkportal-monitoring-field {
+	display: grid;
+	gap: var(--msp-space-2);
+}
+
+.uplinkportal-monitoring-options {
+	padding: var(--msp-space-3);
+	margin: 0;
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-monitoring-options label {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	margin-bottom: var(--msp-space-2);
+}
+
+.uplinkportal-monitoring-options label:last-child {
+	margin-bottom: 0;
+}
+
+.uplinkportal-inline-callout {
+	margin-top: 0;
+	margin-bottom: var(--msp-space-2);
+}
+
+.uplinkportal-inline-callout p {
+	margin: var(--msp-space-2) 0;
+}
+
+.uplinkportal-tools-screen .uplinkportal-admin-card > h2 {
+	margin-bottom: var(--msp-space-1);
+}
+
+.uplinkportal-tools-screen .uplinkportal-admin-card > .description {
+	margin-top: 0;
+	margin-bottom: var(--msp-space-3);
+}
+
+.uplinkportal-tools-screen details {
+	margin-top: var(--msp-space-3);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-tools-screen details > summary {
+	padding: var(--msp-space-3);
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.uplinkportal-details-panel {
+	padding: 0 var(--msp-space-3) var(--msp-space-3);
+}
+
+.uplinkportal-inline-action {
+	margin: 0;
+}
+
+.uplinkportal-module-window-panel[hidden] {
+	display: none !important;
+}
+
+.uplinkportal-table-scroll {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.uplinkportal-table-scroll .widefat {
+	min-width: 620px;
+}
+
+.uplinkportal-admin-card .widefat {
+	width: 100%;
+}
+
+.uplinkportal-admin-card .widefat thead th {
+	background: #f4f8fc;
+	color: #334155;
+}
+
+.uplinkportal-admin-card .widefat th,
+.uplinkportal-admin-card .widefat td {
+	white-space: normal;
+	word-break: break-word;
+}
+
+.uplinkportal-module-window-panel .widefat {
+	min-width: 680px;
+}
+
+.uplinkportal-field-label {
+	font-weight: 600;
+	color: var(--msp-text);
+}
+
+.uplinkportal-auth-type-grid {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: var(--msp-space-2);
+}
+
+.uplinkportal-auth-type-option {
+	position: relative;
+	display: inline-flex;
+}
+
+.uplinkportal-auth-type-option input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.uplinkportal-auth-type-option span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 88px;
+	padding: 8px 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: #f8fafc;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.uplinkportal-auth-type-option input[type="radio"]:checked + span {
+	background: var(--msp-accent-soft);
+	border-color: var(--msp-accent);
+	color: var(--msp-accent-strong);
+}
+
+.uplinkportal-client-matrix td,
+.uplinkportal-client-matrix th {
+	vertical-align: middle;
+}
+
+.uplinkportal-client-matrix-cell {
+	text-align: center;
+}
+
+.uplinkportal-exception-none {
+	color: #6b7280;
+	font-size: 12px;
+}
+
+.uplinkportal-exception-pill {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 8px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 600;
+	margin-right: 4px;
+	border: 1px solid transparent;
+}
+
+.uplinkportal-exception-pill.is-added {
+	background: #ecfdf5;
+	color: #047857;
+	border-color: #a7f3d0;
+}
+
+.uplinkportal-exception-pill.is-removed {
+	background: #fff1f2;
+	color: #be123c;
+	border-color: #fecdd3;
+}
+
+.uplinkportal-override-modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(15, 23, 42, 0.45);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 18px;
+	z-index: 100000;
+}
+
+.uplinkportal-override-modal[hidden],
+.uplinkportal-plan-modal[hidden] {
+	display: none !important;
+}
+
+.uplinkportal-override-dialog {
+	background: #fff;
+	border-radius: 12px;
+	max-width: 520px;
+	width: 100%;
+	max-height: 80vh;
+	overflow: auto;
+	padding: 18px;
+	border: 1px solid var(--uplinkportal-border);
+	box-shadow: 0 18px 40px rgba(15, 23, 42, 0.24);
+}
+
+.uplinkportal-override-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 8px;
+	margin: 12px 0;
+}
+
+.uplinkportal-plan-templates-table input[type="text"] {
+	min-width: 120px;
+}
+
+.uplinkportal-service-section {
+	margin-bottom: 22px;
+	clear: none;
+	min-width: 0;
+	overflow: visible;
+}
+
+.uplinkportal-service-section:last-of-type {
+	margin-bottom: 0;
+}
+
+.uplinkportal-plan-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 14px;
+	grid-auto-rows: auto;
+	align-items: start;
+}
+
+.uplinkportal-plan-shell {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.uplinkportal-plan-card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: auto;
+	min-height: 100%;
+	min-width: 0;
+	padding: 14px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 12px;
+	background: #fff;
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-plan-shell.is-marked-remove .uplinkportal-plan-card {
+	opacity: 0.55;
+	border-style: dashed;
+}
+
+.uplinkportal-plan-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.uplinkportal-plan-card-header > .dashicons {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	color: var(--msp-accent);
+}
+
+.uplinkportal-plan-card-header .uplinkportal-icon-action .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	color: inherit;
+}
+
+.uplinkportal-plan-card h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.uplinkportal-plan-card p {
+	margin: 0;
+	color: #475569;
+	overflow-wrap: anywhere;
+}
+
+.uplinkportal-plan-card-meta {
+	font-size: 12px;
+	font-weight: 600;
+	color: #334155;
+}
+
+.uplinkportal-plan-add-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	min-height: 170px;
+	border: 2px dashed #9ca3af;
+	border-radius: 12px;
+	background: #fff;
+	cursor: pointer;
+	color: #334155;
+	min-width: 0;
+}
+
+.uplinkportal-plan-add-card span {
+	font-size: 42px;
+	line-height: 1;
+}
+
+.uplinkportal-plan-modal {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 18px;
+	background: rgba(15, 23, 42, 0.45);
+	z-index: 100000;
+}
+
+.uplinkportal-plan-dialog {
+	width: 100%;
+	max-width: 560px;
+	max-height: 82vh;
+	overflow: auto;
+	background: #fff;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 12px;
+	padding: 16px;
+	box-shadow: 0 18px 40px rgba(15, 23, 42, 0.24);
+}
+
+.uplinkportal-plan-dialog-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 10px;
+}
+
+.uplinkportal-plan-dialog-head h3 {
+	margin: 0;
+}
+
+.uplinkportal-plan-dialog label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.uplinkportal-plan-dialog label input,
+.uplinkportal-plan-dialog label textarea,
+.uplinkportal-plan-dialog label select {
+	margin-top: 4px;
+}
+
+.uplinkportal-plan-module-group {
+	margin: 10px 0;
+	padding: 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: #f8fafc;
+}
+
+.uplinkportal-plan-module-group legend {
+	padding: 0 6px;
+	font-weight: 600;
+}
+
+.uplinkportal-plan-module-check {
+	display: block;
+	margin: 6px 0;
+	font-weight: 400;
+}
+
+.uplinkportal-plan-remove-option {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+	font-weight: 500;
+}
+
+.uplinkportal-plan-dialog-actions {
+	margin: 14px 0 0;
+}
+
+.uplinkportal-service-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.uplinkportal-service-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: var(--uplinkportal-panel-alt);
+}
+
+.uplinkportal-service-row h3 {
+	margin: 0 0 4px;
+	font-size: 15px;
+}
+
+.uplinkportal-service-row p {
+	margin: 0;
+	font-size: 13px;
+	color: #475569;
+}
+
+.uplinkportal-service-row-meta {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 6px;
+}
+
+.uplinkportal-service-coverage {
+	font-size: 12px;
+	color: #475569;
+}
+
+.uplinkportal-addon-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 12px;
+}
+
+.uplinkportal-addon-card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 12px;
+	background: #fff;
+}
+
+.uplinkportal-addon-card .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	color: var(--msp-accent);
+}
+
+.uplinkportal-addon-card h3 {
+	margin: 0;
+}
+
+.uplinkportal-addon-card p {
+	margin: 0;
+	color: #475569;
+}
+
+.uplinkportal-doc-browser {
+	display: block;
+}
+
+.uplinkportal-folder-view {
+	padding: 16px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: var(--uplinkportal-panel-alt);
+}
+
+.uplinkportal-folder-view h2 {
+	margin: 0 0 10px;
+	font-size: 16px;
+}
+
+.uplinkportal-folder-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.uplinkportal-folder-button {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: #fff;
+	text-align: left;
+	cursor: pointer;
+}
+
+.uplinkportal-folder-button.is-active {
+	border-color: var(--msp-accent);
+	background: var(--msp-accent-soft);
+}
+
+.uplinkportal-doc-workspace {
+	display: block;
+}
+
+.uplinkportal-folder-view[hidden],
+.uplinkportal-doc-workspace[hidden],
+.uplinkportal-doc-list[hidden],
+.uplinkportal-is-hidden {
+	display: none !important;
+}
+
+.uplinkportal-doc-workspace-top {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0 0 10px;
+}
+
+.uplinkportal-doc-workspace-title {
+	font-weight: 600;
+	color: #0f172a;
+}
+
+.uplinkportal-doc-upload-form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 10px;
+	margin: 0 0 12px;
+	padding: 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: #f8fafc;
+}
+
+.uplinkportal-doc-upload-form label {
+	font-weight: 600;
+}
+
+.uplinkportal-doc-upload-form input[type="file"] {
+	max-width: 320px;
+}
+
+.uplinkportal-doc-delete-form {
+	margin: 0 0 12px;
+}
+
+.uplinkportal-doc-workspace-grid {
+	display: grid;
+	grid-template-columns: minmax(250px, 320px) 1fr;
+	gap: 12px;
+}
+
+.uplinkportal-doc-list-panel,
+.uplinkportal-doc-preview-panel {
+	padding: 12px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: #fff;
+}
+
+.uplinkportal-doc-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.uplinkportal-doc-empty {
+	padding: 10px;
+	color: #6b7280;
+}
+
+.uplinkportal-doc-item {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+	padding: 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+	background: #f8fafc;
+	cursor: pointer;
+	text-align: left;
+}
+
+.uplinkportal-doc-item strong {
+	font-size: 13px;
+}
+
+.uplinkportal-doc-item span {
+	font-size: 12px;
+	color: #6b7280;
+}
+
+.uplinkportal-doc-item.is-active {
+	border-color: var(--msp-accent);
+	background: var(--msp-accent-soft);
+}
+
+.uplinkportal-doc-preview-panel h2 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.uplinkportal-doc-preview-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 8px 0 12px;
+	font-size: 12px;
+	color: #475569;
+}
+
+.uplinkportal-doc-preview-meta span {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 8px;
+	border-radius: 999px;
+	border: 1px solid #cbd5e1;
+	background: #f8fafc;
+}
+
+.uplinkportal-doc-preview-surface {
+	min-height: 180px;
+	padding: 14px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: #f8fafc;
+}
+
+.uplinkportal-doc-preview-frame-wrap {
+	margin: 0 0 10px;
+	border: 1px solid #d1d9e2;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.uplinkportal-doc-preview-frame {
+	display: block;
+	width: 100%;
+	height: 420px;
+	border: 0;
+}
+
+.uplinkportal-doc-preview-fallback {
+	margin: 0 0 10px;
+	color: #6b7280;
+	font-size: 12px;
+}
+
+.uplinkportal-doc-preview-surface p {
+	margin: 0;
+	color: #334155;
+	line-height: 1.5;
+}
+
+.uplinkportal-doc-preview-actions {
+	margin-top: 10px;
+}
+
+.uplinkportal-storage-meter {
+	position: relative;
+	height: 14px;
+	width: min(560px, 100%);
+	border-radius: 999px;
+	border: 1px solid #cbd5e1;
+	background: #f1f5f9;
+	overflow: hidden;
+	margin: 8px 0 6px;
+}
+
+.uplinkportal-storage-meter-fill {
+	display: block;
+	height: 100%;
+	background: #94a3b8;
+}
+
+.uplinkportal-storage-stats {
+	margin: 8px 0 14px 18px;
+}
+
+.uplinkportal-cloud-todo {
+	border-left: 4px solid #0284c7;
+	background: #eff6ff;
+}
+
+.uplinkportal-modal-open {
+	overflow: hidden;
+}
+
+.uplinkportal-logo-preview-wrap {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 180px;
+	height: 180px;
+	border-radius: 10px;
+	border: 1px solid var(--uplinkportal-border);
+	background: #f8fafc;
+	overflow: hidden;
+}
+
+.uplinkportal-logo-preview-wrap img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.uplinkportal-logo-preview-wrap span {
+	padding: 10px;
+	font-size: 12px;
+	text-align: center;
+	color: #64748b;
+}
+
+.uplinkportal-customization-layout {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	align-items: start;
+}
+
+.uplinkportal-customization-section {
+	grid-column: 1 / -1;
+	padding: 16px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 12px;
+	background: #fff;
+	box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+}
+
+.uplinkportal-customization-section h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.uplinkportal-section-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin: 0 0 12px;
+}
+
+.uplinkportal-section-save {
+	min-height: 34px;
+}
+
+.uplinkportal-section-save .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+}
+
+.uplinkportal-customization-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 12px;
+}
+
+.uplinkportal-customization-grid p {
+	margin: 0;
+}
+
+.uplinkportal-customization-grid p label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 600;
+}
+
+.uplinkportal-customization-grid p input[type="text"],
+.uplinkportal-customization-grid p input[type="email"],
+.uplinkportal-customization-grid p input[type="number"],
+.uplinkportal-customization-grid p input[type="color"],
+.uplinkportal-customization-grid p select,
+.uplinkportal-customization-grid p textarea {
+	width: 100%;
+	max-width: 100%;
+}
+
+.uplinkportal-grid-col-span {
+	grid-column: 1 / -1;
+}
+
+.uplinkportal-logo-control {
+	display: grid;
+	gap: 10px;
+	justify-items: center;
+	text-align: center;
+}
+
+.uplinkportal-logo-footnote {
+	margin: 0;
+	max-width: 280px;
+	font-size: 11px;
+}
+
+.uplinkportal-hours-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+}
+
+.uplinkportal-hours-day {
+	display: grid;
+	grid-template-columns: minmax(86px, auto) minmax(0, 1fr);
+	align-items: center;
+	gap: 12px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	padding: 10px 12px;
+	background: #fff;
+}
+
+.uplinkportal-hours-day.is-enabled {
+	border-color: var(--uplinkportal-border);
+}
+
+.uplinkportal-hours-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 600;
+	min-width: 72px;
+}
+
+.uplinkportal-hours-day-label {
+	color: #94a3b8;
+}
+
+.uplinkportal-hours-day.is-enabled .uplinkportal-hours-day-label {
+	color: #0f172a;
+}
+
+.uplinkportal-hours-time-fields {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	flex: 1;
+	min-width: 0;
+	width: 100%;
+}
+
+.uplinkportal-hours-selects {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	max-width: 100%;
+}
+
+.uplinkportal-hours-selects label {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 12px;
+	color: #334155;
+}
+
+.uplinkportal-hours-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	padding: 3px 7px;
+	border-radius: 999px;
+	border: 1px solid #d1d9e2;
+	background: #eef2f6;
+	color: #334155;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.uplinkportal-hours-chip .dashicons {
+	width: 13px;
+	height: 13px;
+	font-size: 13px;
+	line-height: 13px;
+}
+
+.uplinkportal-hours-selects select {
+	min-width: 110px;
+}
+
+.uplinkportal-hours-dashes {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	max-width: 100%;
+}
+
+.uplinkportal-hours-state-hidden,
+.uplinkportal-hours-selects[hidden],
+.uplinkportal-hours-dashes[hidden] {
+	display: none !important;
+}
+
+.uplinkportal-hours-dashes span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 110px;
+	padding: 5px 8px;
+	border: 1px dashed #cbd5e1;
+	border-radius: 6px;
+	color: #64748b;
+	background: #f8fafc;
+}
+
+.uplinkportal-email-methods {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 10px;
+}
+
+.uplinkportal-email-methods-wrap {
+	margin-top: 8px;
+}
+
+.uplinkportal-email-method {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 10px;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 10px;
+	background: #f8fafc;
+}
+
+.uplinkportal-email-method small {
+	display: block;
+	margin-top: 3px;
+	color: #475569;
+}
+
+.uplinkportal-email-method.is-disabled {
+	opacity: 0.68;
+}
+
+.uplinkportal-custom-smtp-fields {
+	margin-top: 12px;
+	padding-top: 12px;
+	border-top: 1px solid var(--uplinkportal-border);
+}
+
+.uplinkportal-preview-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+	margin: 14px 0 0;
+}
+
+.uplinkportal-portal-preview-layout {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	align-items: start;
+}
+
+.uplinkportal-portal-preview-shell {
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 12px;
+	background: #fff;
+	padding: 10px;
+	box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+	width: 100%;
+}
+
+.uplinkportal-portal-preview-shell .uplinkportal-shell {
+	width: 100%;
+	max-width: none;
+}
+
+@media (min-width: 782px) {
+	.uplinkportal-customization-layout {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+
+	.uplinkportal-customization-section--company,
+	.uplinkportal-customization-section--logo,
+	.uplinkportal-customization-section--hours,
+	.uplinkportal-customization-section--email {
+		grid-column: span 3;
+	}
+
+	.uplinkportal-portal-preview-layout {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 1080px) {
+	.uplinkportal-settings-shell {
+		grid-template-columns: 1fr;
+	}
+
+	.uplinkportal-settings-sidebar {
+		position: static;
+	}
+
+	.uplinkportal-settings-screen .uplinkportal-config-tabs {
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	}
+}
+
+@media (min-width: 1200px) {
+	.uplinkportal-customization-layout {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+	}
+
+	.uplinkportal-customization-section--company {
+		grid-column: span 7;
+	}
+
+	.uplinkportal-customization-section--logo {
+		grid-column: span 5;
+	}
+
+	.uplinkportal-customization-section--hours {
+		grid-column: span 7;
+	}
+
+	.uplinkportal-customization-section--email {
+		grid-column: span 5;
+	}
+}
+
+.uplinkportal-validation-result {
+	margin-top: 12px;
+}
+
+.uplinkportal-validation-group {
+	margin-top: 10px;
+	padding: 12px;
+	background: #fff;
+	border: 1px solid var(--uplinkportal-border);
+	border-radius: 8px;
+}
+
+.uplinkportal-validation-group label {
+	display: block;
+	margin-top: 8px;
+	margin-bottom: 4px;
+}
+
+.uplinkportal-validation-guidance h4 {
+	margin-bottom: 6px;
+}
+
+.uplinkportal-validation-diagnostics {
+	margin-top: 10px;
+}
+
+.uplinkportal-onboarding-steps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding-left: 0;
+	margin-bottom: 16px;
+	list-style: none;
+}
+
+.uplinkportal-onboarding-steps .is-current {
+	font-weight: 700;
+}
+
+.uplinkportal-onboarding {
+	--uplinkportal-onboarding-bg: #f6f8fb;
+	--uplinkportal-onboarding-accent: #0d9488;
+	--uplinkportal-onboarding-dark: #0f172a;
+	--uplinkportal-onboarding-muted: #475569;
+	font-family: inherit;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-header {
+	margin: 18px 0 14px;
+	padding: 18px 20px;
+	border-radius: 16px;
+	background: var(--uplinkportal-onboarding-bg);
+	border: 1px solid #dbeafe;
+	box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-header h1 {
+	margin: 0 0 6px;
+	color: var(--uplinkportal-onboarding-dark);
+	font-size: 30px;
+	letter-spacing: -0.02em;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-header p {
+	margin: 0;
+	color: var(--uplinkportal-onboarding-muted);
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-progress {
+	margin-bottom: 14px;
+	padding: 12px 14px;
+	border: 1px solid #dbe4f0;
+	border-radius: 12px;
+	background: #fff;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-progress-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	font-size: 12px;
+	margin-bottom: 8px;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-progress-track {
+	height: 8px;
+	border-radius: 999px;
+	background: #e8eef7;
+	overflow: hidden;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-progress-fill {
+	display: block;
+	height: 100%;
+	border-radius: 999px;
+	background: #64748b;
+	transition: width 220ms ease-in-out;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-steps li {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 10px;
+	border-radius: 999px;
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	color: #475569;
+	font-size: 12px;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-steps li.is-current {
+	background: rgba(13, 148, 136, 0.1);
+	border-color: rgba(13, 148, 136, 0.35);
+	color: #0f172a;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-step-index {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	border-radius: 999px;
+	background: #e2e8f0;
+	color: #1e293b;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-steps li.is-current .uplinkportal-onboarding-step-index {
+	background: var(--uplinkportal-onboarding-accent);
+	color: #fff;
+}
+
+.uplinkportal-onboarding .uplinkportal-admin-card {
+	border-radius: 14px;
+	border: 1px solid #dfe8f4;
+	box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 14px;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-actions .submit {
+	margin: 0;
+	padding: 0;
+}
+
+.uplinkportal-onboarding .uplinkportal-onboarding-back {
+	min-width: 88px;
+	text-align: center;
+}
+
+.uplinkportal-onboarding.motion-enabled .uplinkportal-onboarding-header,
+.uplinkportal-onboarding.motion-enabled .uplinkportal-onboarding-progress,
+.uplinkportal-onboarding.motion-enabled .uplinkportal-onboarding-steps,
+.uplinkportal-onboarding.motion-enabled .uplinkportal-admin-card {
+	opacity: 0;
+}
+
+.uplinkportal-onboarding.motion-enabled.is-animated .uplinkportal-onboarding-header {
+	animation: uplinkportal-onboarding-fade-up 280ms ease-out forwards;
+}
+
+.uplinkportal-onboarding.motion-enabled.is-animated .uplinkportal-onboarding-progress {
+	animation: uplinkportal-onboarding-fade-up 320ms ease-out 40ms forwards;
+}
+
+.uplinkportal-onboarding.motion-enabled.is-animated .uplinkportal-onboarding-steps {
+	animation: uplinkportal-onboarding-fade-up 340ms ease-out 70ms forwards;
+}
+
+.uplinkportal-onboarding.motion-enabled.is-animated.is-step-forward .uplinkportal-admin-card {
+	animation: uplinkportal-onboarding-step-forward 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 100ms forwards;
+}
+
+.uplinkportal-onboarding.motion-enabled.is-animated.is-step-backward .uplinkportal-admin-card {
+	animation: uplinkportal-onboarding-step-backward 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 100ms forwards;
+}
+
+.uplinkportal-onboarding.motion-enabled.is-leaving .uplinkportal-admin-card {
+	opacity: 0.96;
+	transition: opacity 120ms linear;
+}
+
+@keyframes uplinkportal-onboarding-fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes uplinkportal-onboarding-step-forward {
+	from {
+		opacity: 0;
+		transform: translateX(16px) translateY(4px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0) translateY(0);
+	}
+}
+
+@keyframes uplinkportal-onboarding-step-backward {
+	from {
+		opacity: 0;
+		transform: translateX(-16px) translateY(4px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0) translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.uplinkportal-onboarding.motion-enabled .uplinkportal-onboarding-header,
+	.uplinkportal-onboarding.motion-enabled .uplinkportal-onboarding-progress,
+	.uplinkportal-onboarding.motion-enabled .uplinkportal-onboarding-steps,
+	.uplinkportal-onboarding.motion-enabled .uplinkportal-admin-card {
+		opacity: 1;
+		animation: none;
+		transform: none;
+	}
+}
+
+@media (max-width: 782px) {
+	.uplinkportal-admin-toolbar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.uplinkportal-admin-toolbar-actions {
+		width: 100%;
+	}
+
+	.uplinkportal-admin-hero {
+		padding: var(--msp-space-4);
+		flex-direction: column;
+	}
+
+	.uplinkportal-onboarding .uplinkportal-onboarding-progress-meta {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.uplinkportal-module-card-grid {
+		grid-template-columns: 1fr;
+		gap: var(--msp-space-3);
+	}
+
+	.uplinkportal-doc-browser,
+	.uplinkportal-doc-workspace-grid,
+	.uplinkportal-service-row {
+		grid-template-columns: 1fr;
+		flex-direction: column;
+	}
+
+	.uplinkportal-hours-day {
+		grid-template-columns: 1fr;
+	}
+
+	.uplinkportal-hours-day,
+	.uplinkportal-hours-time-fields,
+	.uplinkportal-hours-selects,
+	.uplinkportal-hours-dashes {
+		justify-content: flex-start;
+	}
+
+	.uplinkportal-doc-upload-form {
+		align-items: stretch;
+	}
+
+	.uplinkportal-service-row-meta {
+		align-items: flex-start;
+	}
+}
+
+/* ==========================================================================
+   Toggle Switch — replaces checkboxes for binary module settings
+   ========================================================================== */
+
+.uplinkportal-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	cursor: pointer;
+}
+
+.uplinkportal-toggle-input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.uplinkportal-toggle-track {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+	background: #d1d5db;
+	border-radius: 999px;
+	transition: background 0.2s ease;
+	flex-shrink: 0;
+}
+
+.uplinkportal-toggle-input:checked + .uplinkportal-toggle-track {
+	background: var(--msp-accent);
+}
+
+.uplinkportal-toggle-input:focus-visible + .uplinkportal-toggle-track {
+	outline: 2px solid var(--msp-accent);
+	outline-offset: 2px;
+}
+
+.uplinkportal-toggle-thumb {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	transition: transform 0.2s ease;
+}
+
+.uplinkportal-toggle-input:checked ~ .uplinkportal-toggle-track .uplinkportal-toggle-thumb,
+.uplinkportal-toggle-input:checked + .uplinkportal-toggle-track .uplinkportal-toggle-thumb {
+	transform: translateX(20px);
+}
+
+.uplinkportal-toggle-label {
+	font-size: 13px;
+	color: var(--msp-text);
+	user-select: none;
+}
+
+/* ==========================================================================
+   Service Card — shared by Service Catalog and Configuration > Modules
+   ========================================================================== */
+
+.uplinkportal-service-card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: var(--msp-space-4);
+	margin: var(--msp-space-4) 0;
+}
+
+.uplinkportal-service-card {
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	padding: var(--msp-space-4);
+	display: flex;
+	flex-direction: column;
+	gap: var(--msp-space-3);
+	box-shadow: var(--uplinkportal-shadow);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+	position: relative;
+}
+
+.uplinkportal-service-card:hover {
+	border-color: var(--msp-accent-border);
+	box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+}
+
+.uplinkportal-service-card-icon {
+	width: 40px;
+	height: 40px;
+	background: var(--msp-accent-soft);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--msp-accent);
+	flex-shrink: 0;
+}
+
+.uplinkportal-service-card-icon .dashicons {
+	font-size: 22px;
+	width: 22px;
+	height: 22px;
+	line-height: 1;
+}
+
+.uplinkportal-service-card-header {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--msp-space-3);
+}
+
+.uplinkportal-service-card-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--msp-text);
+	margin: 0 0 var(--msp-space-1);
+	line-height: 1.3;
+}
+
+.uplinkportal-service-card-desc {
+	font-size: 12px;
+	color: var(--msp-text-muted);
+	margin: 0;
+	line-height: 1.5;
+}
+
+.uplinkportal-service-card-meta {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	flex-wrap: wrap;
+}
+
+.uplinkportal-service-card-module-chip {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: var(--msp-surface-muted);
+	border: 1px solid var(--msp-border);
+	font-size: 11px;
+	color: var(--msp-text-muted);
+	font-weight: 500;
+}
+
+.uplinkportal-service-card-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	justify-content: space-between;
+	margin-top: auto;
+}
+
+.uplinkportal-service-card-cog {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 6px;
+	background: var(--msp-surface-muted);
+	border: 1px solid var(--msp-border);
+	color: var(--msp-text-muted);
+	text-decoration: none;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.uplinkportal-service-card-cog:hover {
+	background: var(--msp-accent-soft);
+	color: var(--msp-accent);
+	border-color: var(--msp-accent-border);
+}
+
+.uplinkportal-service-card-cog .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+/* ==========================================================================
+   Accordion — plan rows in Service Catalog
+   ========================================================================== */
+
+.uplinkportal-accordion {
+	display: flex;
+	flex-direction: column;
+	gap: var(--msp-space-2);
+	margin: var(--msp-space-4) 0;
+}
+
+.uplinkportal-accordion-item {
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	overflow: hidden;
+	transition: border-color 0.15s ease;
+}
+
+.uplinkportal-accordion-item:focus-within,
+.uplinkportal-accordion-item:has(.uplinkportal-accordion-trigger[aria-expanded="true"]) {
+	border-color: var(--msp-accent-border);
+}
+
+.uplinkportal-accordion-trigger {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-3);
+	width: 100%;
+	padding: var(--msp-space-4);
+	background: none;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	color: var(--msp-text);
+	font-size: 14px;
+	font-weight: 600;
+	transition: background 0.15s ease;
+}
+
+.uplinkportal-accordion-trigger:hover {
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-accordion-trigger[aria-expanded="true"] {
+	background: var(--msp-accent-soft);
+	color: var(--msp-accent-strong);
+}
+
+.uplinkportal-accordion-trigger-icon {
+	width: 36px;
+	height: 36px;
+	background: var(--msp-accent-soft);
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--msp-accent);
+	flex-shrink: 0;
+}
+
+.uplinkportal-accordion-trigger[aria-expanded="true"] .uplinkportal-accordion-trigger-icon {
+	background: var(--msp-accent);
+	color: #fff;
+}
+
+.uplinkportal-accordion-chevron {
+	margin-left: auto;
+	color: var(--msp-text-muted);
+	transition: transform 0.2s ease;
+}
+
+.uplinkportal-accordion-trigger[aria-expanded="true"] .uplinkportal-accordion-chevron {
+	transform: rotate(180deg);
+}
+
+.uplinkportal-accordion-panel {
+	padding: var(--msp-space-4);
+	border-top: 1px solid var(--msp-border);
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-accordion-panel[hidden] {
+	display: none;
+}
+
+/* ==========================================================================
+   Client Access Matrix
+   ========================================================================== */
+
+.uplinkportal-matrix-search-bar {
+	margin-bottom: var(--msp-space-3);
+}
+
+.uplinkportal-matrix-search-bar input[type="search"] {
+	width: 100%;
+	max-width: 360px;
+	padding: 8px 12px;
+	border: 1px solid var(--msp-border);
+	border-radius: 6px;
+	font-size: 13px;
+	outline: none;
+	transition: border-color 0.15s ease;
+}
+
+.uplinkportal-matrix-search-bar input[type="search"]:focus {
+	border-color: var(--msp-accent);
+	box-shadow: 0 0 0 2px var(--msp-accent-soft);
+}
+
+.uplinkportal-matrix-wrap {
+	overflow-x: auto;
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-matrix-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+.uplinkportal-matrix-table th {
+	background: var(--msp-surface-muted);
+	padding: 10px 14px;
+	text-align: left;
+	font-weight: 600;
+	color: var(--msp-text-muted);
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	border-bottom: 1px solid var(--msp-border);
+	white-space: nowrap;
+}
+
+.uplinkportal-matrix-table td {
+	padding: 10px 14px;
+	border-bottom: 1px solid var(--msp-border);
+	vertical-align: middle;
+}
+
+.uplinkportal-matrix-table tr:last-child td {
+	border-bottom: none;
+}
+
+.uplinkportal-matrix-table tr:hover td {
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-matrix-cell {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+
+.uplinkportal-matrix-cell--enabled {
+	color: #16a34a;
+	background: #dcfce7;
+}
+
+.uplinkportal-matrix-cell--enabled:hover {
+	background: #bbf7d0;
+}
+
+.uplinkportal-matrix-cell--disabled {
+	color: #dc2626;
+	background: #fee2e2;
+}
+
+.uplinkportal-matrix-cell--disabled:hover {
+	background: #fecaca;
+}
+
+.uplinkportal-matrix-cell--inherit {
+	color: var(--msp-text-muted);
+	background: var(--msp-surface-muted);
+}
+
+.uplinkportal-matrix-cell--inherit:hover {
+	background: var(--msp-border);
+}
+
+/* ==========================================================================
+   Role-View Switcher — Operations Dashboard
+   ========================================================================== */
+
+.uplinkportal-view-switcher {
+	display: flex;
+	gap: var(--msp-space-2);
+	margin-bottom: var(--msp-space-5);
+	flex-wrap: wrap;
+}
+
+.uplinkportal-view-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	padding: 8px 16px;
+	border-radius: 8px;
+	border: 1px solid var(--msp-border);
+	background: var(--msp-surface);
+	color: var(--msp-text-muted);
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.uplinkportal-view-tab:hover {
+	border-color: var(--msp-accent-border);
+	color: var(--msp-accent);
+	background: var(--msp-accent-soft);
+}
+
+.uplinkportal-view-tab.is-active {
+	background: var(--msp-accent);
+	border-color: var(--msp-accent);
+	color: #fff;
+}
+
+.uplinkportal-view-panel[hidden] {
+	display: none;
+}
+
+/* Dashboard KPI widget grid */
+.uplinkportal-kpi-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: var(--msp-space-4);
+	margin-bottom: var(--msp-space-5);
+}
+
+.uplinkportal-kpi-card {
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	padding: var(--msp-space-4);
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-kpi-card-label {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--msp-text-muted);
+	margin-bottom: var(--msp-space-2);
+}
+
+.uplinkportal-kpi-card-value {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--msp-text);
+	line-height: 1.1;
+	margin-bottom: var(--msp-space-1);
+}
+
+.uplinkportal-kpi-card-sub {
+	font-size: 12px;
+	color: var(--msp-text-muted);
+}
+
+.uplinkportal-kpi-card-indicator {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.uplinkportal-kpi-card-indicator.is-up {
+	color: #16a34a;
+}
+
+.uplinkportal-kpi-card-indicator.is-down {
+	color: #dc2626;
+}
+
+.uplinkportal-kpi-integration-note {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-3);
+	padding: var(--msp-space-4);
+	background: var(--msp-accent-soft);
+	border: 1px solid var(--msp-accent-border);
+	border-radius: var(--msp-radius);
+	font-size: 13px;
+	color: var(--msp-accent-strong);
+	margin-bottom: var(--msp-space-4);
+}
+
+/* ==========================================================================
+   Portal Preview — iframe device frames
+   ========================================================================== */
+
+.uplinkportal-preview-frame-switcher {
+	display: flex;
+	gap: var(--msp-space-2);
+	margin-bottom: var(--msp-space-3);
+}
+
+.uplinkportal-preview-device-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	padding: 6px 12px;
+	border: 1px solid var(--msp-border);
+	border-radius: 6px;
+	background: var(--msp-surface);
+	color: var(--msp-text-muted);
+	font-size: 12px;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.uplinkportal-preview-device-btn:hover,
+.uplinkportal-preview-device-btn.is-active {
+	border-color: var(--msp-accent-border);
+	background: var(--msp-accent-soft);
+	color: var(--msp-accent);
+}
+
+.uplinkportal-preview-shell {
+	position: relative;
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	overflow: hidden;
+	transition: max-width 0.3s ease;
+	margin: 0 auto;
+}
+
+.uplinkportal-preview-shell--desktop {
+	max-width: 100%;
+}
+
+.uplinkportal-preview-shell--tablet {
+	max-width: 768px;
+}
+
+.uplinkportal-preview-shell--mobile {
+	max-width: 375px;
+}
+
+.uplinkportal-preview-shell iframe {
+	display: block;
+	width: 100%;
+	height: 600px;
+	border: none;
+}
+
+.uplinkportal-preview-mode-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: #fef3c7;
+	border: 1px solid #fcd34d;
+	color: #92400e;
+	font-size: 11px;
+	font-weight: 600;
+	margin-bottom: var(--msp-space-3);
+}
+
+/* ==========================================================================
+   Card Row — Two-column side-by-side admin card layout
+   ========================================================================== */
+
+.uplinkportal-card-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--msp-space-4);
+	align-items: start;
+}
+
+.uplinkportal-card-row .uplinkportal-admin-card {
+	margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Portal Preview Role Selector Bar
+   ========================================================================== */
+
+.uplinkportal-preview-role-bar {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-3);
+	margin-bottom: var(--msp-space-3);
+	padding: var(--msp-space-2) var(--msp-space-3);
+	background: var(--msp-surface-muted);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+}
+
+.uplinkportal-preview-role-bar label {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--msp-space-1);
+	font-weight: 600;
+	font-size: 12px;
+	white-space: nowrap;
+	margin: 0;
+}
+
+.uplinkportal-preview-role-bar select {
+	min-width: 180px;
+}
+
+/* ==========================================================================
+   Pro Placeholder Cards — Add-on Module Catalog boundary
+   ========================================================================== */
+
+.uplinkportal-pro-placeholder-card {
+	background: linear-gradient(140deg, var(--up-pro-soft, #f5f3ff) 0%, #fefcff 100%);
+	border: 1px dashed var(--up-pro-border, #c4b5fd);
+	border-radius: var(--msp-radius);
+	padding: var(--msp-space-4);
+	display: flex;
+	flex-direction: column;
+	gap: var(--msp-space-3);
+	position: relative;
+	overflow: hidden;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.uplinkportal-pro-placeholder-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: repeating-linear-gradient(
+		45deg,
+		transparent,
+		transparent 14px,
+		rgba(124, 58, 237, 0.028) 14px,
+		rgba(124, 58, 237, 0.028) 28px
+	);
+	pointer-events: none;
+}
+
+.uplinkportal-pro-placeholder-card:hover {
+	border-color: var(--up-pro, #7c3aed);
+	box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
+}
+
+.uplinkportal-pro-placeholder-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--msp-space-2);
+}
+
+.uplinkportal-pro-placeholder-card-body {
+	flex: 1;
+}
+
+.uplinkportal-pro-placeholder-cta {
+	font-size: 12px;
+	color: var(--up-pro, #7c3aed);
+	font-weight: 500;
+	margin: 0;
+	opacity: 0.9;
+}
+
+.uplinkportal-pro-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: var(--up-pro-gradient, linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%));
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	border: none;
+	box-shadow: 0 1px 4px rgba(109, 40, 217, 0.3);
+	white-space: nowrap;
+}
+
+.uplinkportal-pro-badge .dashicons {
+	font-size: 12px;
+	width: 12px;
+	height: 12px;
+	line-height: 1;
+}
+
+.uplinkportal-pro-placeholder-card-icon {
+	width: 44px;
+	height: 44px;
+	background: rgba(124, 58, 237, 0.1);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--up-pro, #7c3aed);
+	flex-shrink: 0;
+	border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+.uplinkportal-pro-placeholder-card-icon .dashicons {
+	font-size: 22px;
+	width: 22px;
+	height: 22px;
+}
+
+/* ==========================================================================
+   Security Groups — Configuration > Security tab
+   ========================================================================== */
+
+.uplinkportal-security-groups {
+	display: flex;
+	flex-direction: column;
+	gap: var(--msp-space-4);
+	margin-top: var(--msp-space-4);
+}
+
+.uplinkportal-security-group {
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	overflow: hidden;
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-security-group-header {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-3);
+	padding: var(--msp-space-3) var(--msp-space-4);
+	background: var(--msp-surface-muted);
+	border-bottom: 1px solid var(--msp-border);
+}
+
+.uplinkportal-security-group-header h3 {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--msp-text);
+}
+
+.uplinkportal-security-group-header .dashicons {
+	color: var(--msp-accent);
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.uplinkportal-security-group-body {
+	padding: var(--msp-space-4);
+}
+
+/* Security Health Score dial */
+.uplinkportal-health-score-wrap {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-5);
+	padding: var(--msp-space-4);
+	background: var(--msp-surface-muted);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	margin-bottom: var(--msp-space-4);
+}
+
+.uplinkportal-health-score {
+	--score: 0;
+	width: 96px;
+	height: 96px;
+	border-radius: 50%;
+	background: conic-gradient(var(--msp-accent) calc(var(--score) * 1%), #e5e7eb 0%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	flex-shrink: 0;
+	box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+.uplinkportal-health-score::after {
+	content: "";
+	position: absolute;
+	inset: 12px;
+	border-radius: 50%;
+	background: var(--msp-surface);
+}
+
+.uplinkportal-health-score-number {
+	position: relative;
+	z-index: 1;
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--msp-text);
+	line-height: 1;
+}
+
+.uplinkportal-health-score-info h4 {
+	margin: 0 0 var(--msp-space-1);
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--msp-text);
+}
+
+.uplinkportal-health-score-info p {
+	margin: 0;
+	font-size: 12px;
+	color: var(--msp-text-muted);
+}
+
+/* Company Info section groups */
+.uplinkportal-company-section {
+	background: var(--msp-surface);
+	border: 1px solid var(--msp-border);
+	border-radius: var(--msp-radius);
+	overflow: hidden;
+	margin-bottom: var(--msp-space-4);
+	box-shadow: var(--uplinkportal-shadow);
+}
+
+.uplinkportal-company-section-header {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-3);
+	padding: var(--msp-space-3) var(--msp-space-4);
+	background: var(--msp-surface-muted);
+	border-bottom: 1px solid var(--msp-border);
+}
+
+.uplinkportal-company-section-header h3 {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--msp-text);
+}
+
+.uplinkportal-company-section-body {
+	padding: var(--msp-space-4);
+}
+
+.uplinkportal-brand-preview-strip {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-3);
+	padding: var(--msp-space-3) var(--msp-space-4);
+	border-radius: 8px;
+	margin-top: var(--msp-space-3);
+	background: #1e1b4b;
+	color: #e0e7ff;
+	font-size: 13px;
+	font-weight: 600;
+	transition: background 0.2s ease;
+}
+
+.uplinkportal-brand-preview-strip .brand-preview-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #fff;
+	opacity: 0.5;
+}
+
+@media (max-width: 782px) {
+	.uplinkportal-card-row {
+		grid-template-columns: 1fr;
+	}
+
+	.uplinkportal-card-row .uplinkportal-admin-card {
+		margin-bottom: var(--msp-space-4);
+	}
+
+	.uplinkportal-service-card-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.uplinkportal-kpi-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.uplinkportal-view-switcher {
+		flex-direction: column;
+	}
+
+	.uplinkportal-matrix-wrap {
+		border-radius: 0;
+	}
+}
+
+/* ==========================================================================
+   UI/UX Enhancement Layer — card hover states, section badges, focus rings
+   ========================================================================== */
+
+/* Card hover lift — applied to interactive admin cards */
+.uplinkportal-admin-card {
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.uplinkportal-admin-card:hover {
+	border-color: #c7d2fe;
+	box-shadow: var(--up-card-lift-shadow-sm, 0 2px 8px rgba(79, 70, 229, 0.08));
+}
+
+/* KPI card hover lift */
+.uplinkportal-kpi-card {
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
+}
+
+.uplinkportal-kpi-card:hover {
+	border-color: var(--msp-accent-border);
+	box-shadow: var(--up-card-lift-shadow, 0 4px 14px rgba(79, 70, 229, 0.1));
+	transform: translateY(-1px);
+}
+
+/* Module section head — structured header for each catalog section */
+.uplinkportal-module-section-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--msp-space-3);
+	margin-bottom: var(--msp-space-4);
+	padding-bottom: var(--msp-space-3);
+	border-bottom: 1px solid var(--msp-border);
+}
+
+.uplinkportal-module-section-title {
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-2);
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+/* Section badges — color-coded labels for Core / Pro / Custom module sections */
+.uplinkportal-module-section-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 10px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	line-height: 1.6;
+}
+
+.uplinkportal-module-section-badge--core {
+	background: var(--msp-accent-soft);
+	color: var(--msp-accent-strong);
+	border: 1px solid var(--msp-accent-border);
+}
+
+.uplinkportal-module-section-badge--addon {
+	background: var(--up-pro-soft, #f5f3ff);
+	color: var(--up-pro, #7c3aed);
+	border: 1px solid var(--up-pro-border, #c4b5fd);
+}
+
+.uplinkportal-module-section-badge--custom {
+	background: #f0fdf4;
+	color: #166534;
+	border: 1px solid #bbf7d0;
+}
+
+/* Status pill semantic enhancements — pull from tokens */
+.uplinkportal-status-pill.is-enabled {
+	background: var(--up-success-soft, #dcfce7);
+	color: #1f5131;
+	border-color: var(--up-success-border, #86efac);
+}
+
+.uplinkportal-status-pill.is-warning {
+	background: var(--up-warning-soft, #fef3c7);
+	color: #8a4b20;
+	border-color: var(--up-warning-border, #fcd34d);
+}
+
+/* Focus ring normalization for admin context */
+.uplinkportal-admin :focus-visible,
+.msp-admin :focus-visible {
+	outline: 2px solid var(--msp-accent);
+	outline-offset: 2px;
+	border-radius: 3px;
+}
+
+/* Health score wrap — give the summary copy more breathing room */
+.uplinkportal-health-score-info {
+	flex: 1;
+}
+
+/* Matrix table — improve header background for visual separation */
+.uplinkportal-admin-card .widefat thead th,
+.uplinkportal-matrix-table th {
+	background: linear-gradient(180deg, #f4f8fc 0%, #edf2f8 100%);
+}
+
+/* KPI trend indicator — make up/down arrows more prominent */
+.uplinkportal-kpi-card-indicator {
+	margin-top: var(--msp-space-1);
+}
+
+.uplinkportal-kpi-card-indicator.is-up::before {
+	content: "↑";
+	margin-right: 2px;
+}
+
+.uplinkportal-kpi-card-indicator.is-down::before {
+	content: "↓";
+	margin-right: 2px;
+}
+
+/* Hero badge — ensure it never wraps */
+.uplinkportal-admin-badge {
+	white-space: nowrap;
+}
+
+/* Module card — subtle hover state for consistency */
+.uplinkportal-module-card {
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.uplinkportal-module-card:hover {
+	border-color: var(--msp-accent-border);
+	box-shadow: var(--up-card-lift-shadow-sm, 0 2px 8px rgba(79, 70, 229, 0.08));
+}
+
+/* Service card grid — ensure section description is visible */
+.uplinkportal-module-section > p {
+	margin: 0 0 var(--msp-space-3);
+	color: var(--msp-text-muted);
+	font-size: 13px;
+}
+
+/* Health Score — correct the CSS/PHP structure mismatch.
+   PHP uses .uplinkportal-health-score as a flex wrapper containing
+   .uplinkportal-health-score-dial (the circle) + .uplinkportal-health-score-legend (text).
+   The previous CSS mistakenly applied circle sizing to the wrapper itself. */
+
+.uplinkportal-health-score {
+	width: auto;
+	height: auto;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+	position: static;
+	display: flex;
+	align-items: center;
+	gap: var(--msp-space-4);
+}
+
+.uplinkportal-health-score::after {
+	content: none;
+}
+
+/* Suppress the old .uplinkportal-health-score-number utility — the PHP uses a span inside .uplinkportal-health-score-inner */
+.uplinkportal-health-score-number {
+	display: none;
+}
+
+.uplinkportal-health-score-dial {
+	width: 96px;
+	height: 96px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+.uplinkportal-health-score-inner {
+	position: absolute;
+	inset: 12px;
+	border-radius: 50%;
+	background: var(--msp-surface);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+}
+
+.uplinkportal-health-score-inner > span {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--msp-text);
+	line-height: 1;
+	position: relative;
+	z-index: 1;
+}
+
+.uplinkportal-health-score-legend {
+	flex: 1;
+}
+
+/* Create Plan button — fix dashicon size from the full-card variant (42px) overflowing the WP button. */
+
+.button.uplinkportal-plan-add-card {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	min-height: auto;
+	height: auto;
+	flex-direction: row;
+	min-width: auto;
+}
+
+.button.uplinkportal-plan-add-card .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 1;
+	float: none;
+	vertical-align: middle;
+}
+
+@media (max-width: 782px) {
+	.uplinkportal-kpi-card:hover {
+		transform: none;
+	}
+
+	.uplinkportal-health-score-dial {
+		width: 80px;
+		height: 80px;
+	}
+
+	.uplinkportal-health-score-inner {
+		inset: 10px;
+	}
+
+	.uplinkportal-health-score-inner > span {
+		font-size: 17px;
+	}
+}

@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(vendor/bin/phpunit -c tests/phpunit.xml.dist --list-tests)",
+      "Bash(vendor/bin/phpunit -c tests/phpunit.xml.dist)",
+      "Bash(composer lint)",
+      "Bash(composer phpcbf)",
+      "Bash(composer phpcs)",
+      "Bash(composer spellcheck)",
+      "Bash(composer check-ui-placeholders)",
+      "Bash(vendor/bin/phpcs*)",
+      "Bash(vendor/bin/phpcbf*)",
+      "Bash(./infrastructure/scripts/repo-hygiene-scan.sh)",
+      "Bash(cd infrastructure/worker && npm run typecheck)"
+    ],
+    "additionalDirectories": [
+      "/Users/me/.claude/projects/-Users-me-Software-Repositories-UplinkPortal/memory"
+    ]
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "supabase@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); file=$(echo \"$input\" | jq -r '.tool_input.file_path // empty'); if [[ -n \"$file\" ]] && [[ \"$file\" == */Core/Modules/Pro/* ]]; then echo 'BLOCKED: Pro module files are placeholder-only (public-core-only policy). Implement in the private/pro repository only.'; exit 2; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); file=$(echo \"$input\" | jq -r '.tool_input.file_path // empty'); if [[ -n \"$file\" ]] && [[ \"$file\" == *.php ]] && [[ \"$file\" != */vendor/* ]] && [[ \"$file\" != */node_modules/* ]] && [[ -x vendor/bin/phpcs ]]; then vendor/bin/phpcs --standard=tests/phpcs.xml.dist \"$file\"; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

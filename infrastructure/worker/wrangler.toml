@@ -1,0 +1,8 @@
+name = "<PLUGIN_SLUG_PLACEHOLDER>-license-server"
+main = "src/index.ts"
+compatibility_date = "2026-02-16"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[observability.logs]
+enabled = true

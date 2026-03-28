@@ -1,0 +1,39 @@
+name: DB Migrate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apply-migrations:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required secrets
+        run: |
+          set -euo pipefail
+          if [[ -z "$SUPABASE_DB_URL" ]]; then
+            echo "::error::Missing secret SUPABASE_DB_URL"
+            echo "Add it with: gh secret set SUPABASE_DB_URL --body '<postgres-connection-string>'"
+            echo "Then re-run this workflow from Actions > DB Migrate > Run workflow."
+            exit 1
+          fi
+
+      - name: Install PostgreSQL client
+        run: |
+          set -euo pipefail
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y postgresql-client
+          fi
+
+      - name: Apply SQL migrations
+        run: |
+          set -euo pipefail
+          for migration in $(ls -1 infrastructure/supabase/migrations/*.sql | sort); do
+            echo "Applying ${migration}"
+            psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f "$migration"
+          done

@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": false,
+  "files.exclude": {
+    "vendor": true
+  },
+  "php.validate.executablePath": "php",
+  "chat.mcp.gallery.enabled": true
+}
