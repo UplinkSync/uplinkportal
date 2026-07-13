@@ -31,6 +31,20 @@ class ClientProfileStore {
 	private const META_KEY_PREFIX = 'uplinkportal_client_profile_';
 
 	/**
+	 * Allowed contract type values.
+	 *
+	 * @var array<int,string>
+	 */
+	public const CONTRACT_TYPES = array( 'recurring', 'project', 'none' );
+
+	/**
+	 * Allowed contract status values.
+	 *
+	 * @var array<int,string>
+	 */
+	public const CONTRACT_STATUSES = array( 'active', 'lapsed' );
+
+	/**
 	 * Options helper.
 	 *
 	 * @var Options
@@ -71,25 +85,33 @@ class ClientProfileStore {
 	 */
 	public function get_profile_schema(): array {
 		return array(
-			'company_name'  => array(
+			'company_name'    => array(
 				'label'       => __( 'Company Name', 'uplinkportal' ),
 				'description' => __( 'Client organization or company display name.', 'uplinkportal' ),
 			),
-			'department'    => array(
+			'department'      => array(
 				'label'       => __( 'Department', 'uplinkportal' ),
 				'description' => __( 'Primary internal department for the client user.', 'uplinkportal' ),
 			),
-			'title'         => array(
+			'title'           => array(
 				'label'       => __( 'Title', 'uplinkportal' ),
 				'description' => __( 'Role title shown to support and project teams.', 'uplinkportal' ),
 			),
-			'phone_number'  => array(
+			'phone_number'    => array(
 				'label'       => __( 'Phone Number', 'uplinkportal' ),
 				'description' => __( 'Primary phone number for client contact and notifications.', 'uplinkportal' ),
 			),
-			'email_address' => array(
+			'email_address'   => array(
 				'label'       => __( 'Email Address', 'uplinkportal' ),
 				'description' => __( 'Client profile contact email (may differ from WordPress account email).', 'uplinkportal' ),
+			),
+			'contract_type'   => array(
+				'label'       => __( 'Contract Type', 'uplinkportal' ),
+				'description' => __( 'Engagement type for hiring-trigger metrics: recurring, project, or none.', 'uplinkportal' ),
+			),
+			'contract_status' => array(
+				'label'       => __( 'Contract Status', 'uplinkportal' ),
+				'description' => __( 'Whether the client contract is currently active or lapsed.', 'uplinkportal' ),
 			),
 		);
 	}
@@ -276,6 +298,16 @@ class ClientProfileStore {
 
 		if ( 'phone_number' === $field_key ) {
 			return sanitize_text_field( preg_replace( '/[^0-9\\+\\(\\)\\-\\.\\sx]/i', '', $value ) );
+		}
+
+		if ( 'contract_type' === $field_key ) {
+			$value = sanitize_key( $value );
+			return in_array( $value, self::CONTRACT_TYPES, true ) ? $value : 'none';
+		}
+
+		if ( 'contract_status' === $field_key ) {
+			$value = sanitize_key( $value );
+			return in_array( $value, self::CONTRACT_STATUSES, true ) ? $value : 'lapsed';
 		}
 
 		return sanitize_text_field( $value );

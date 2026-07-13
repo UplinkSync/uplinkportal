@@ -511,6 +511,33 @@
 	white-space: nowrap;
 }
 
+.uplinkportal-hiring-gate-metric {
+	margin: 0.75rem 0;
+}
+
+.uplinkportal-hiring-gate-metric-meta {
+	display: flex;
+	justify-content: space-between;
+	font-size: 13px;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.uplinkportal-hiring-gate-track {
+	height: 8px;
+	border-radius: 999px;
+	background: #e8eef7;
+	overflow: hidden;
+}
+
+.uplinkportal-hiring-gate-fill {
+	display: block;
+	height: 100%;
+	border-radius: 999px;
+	background: #64748b;
+	transition: width 220ms ease-in-out;
+}
+
 .uplinkportal-admin-card hr {
 	margin: 1.25rem 0;
 }

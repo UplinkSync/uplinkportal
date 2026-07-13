@@ -7,6 +7,8 @@
 
 namespace UplinkPortal\Admin\UI;
 
+use UplinkPortal\Core\Support\HiringTriggerService;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -27,6 +29,22 @@ class OperationsDashboardUi {
 	 * @var array<int,string>
 	 */
 	private const VALID_VIEWS = array( 'executive', 'finance', 'technician' );
+
+	/**
+	 * Hiring trigger metrics service.
+	 *
+	 * @var HiringTriggerService
+	 */
+	private HiringTriggerService $hiring_triggers;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param HiringTriggerService $hiring_triggers Hiring trigger metrics service.
+	 */
+	public function __construct( HiringTriggerService $hiring_triggers ) {
+		$this->hiring_triggers = $hiring_triggers;
+	}
 
 	/**
 	 * Renders the full Operations Dashboard body (inside the .wrap container).
@@ -156,6 +174,8 @@ class OperationsDashboardUi {
 				<?php endforeach; ?>
 			</div>
 
+			<?php $this->render_hiring_gate_section(); ?>
+
 			<div class="uplinkportal-admin-card">
 				<h2><?php echo esc_html__( 'Module Health', 'uplinkportal' ); ?></h2>
 				<p class="description">
@@ -237,6 +257,99 @@ class OperationsDashboardUi {
 	}
 
 	/**
+	 * Renders the Phase 1 Hiring Gate card (executive view, msp_manage only).
+	 *
+	 * @return void
+	 */
+	private function render_hiring_gate_section(): void {
+		if ( ! current_user_can( 'msp_manage' ) ) {
+			return;
+		}
+
+		$count       = $this->hiring_triggers->get_recurring_client_count();
+		$mrr         = $this->hiring_triggers->get_current_mrr();
+		$gate_status = $this->hiring_triggers->get_gate_status();
+
+		$count_target = HiringTriggerService::RECURRING_CLIENT_TARGET;
+		$mrr_target   = HiringTriggerService::MRR_TARGET;
+
+		$count_progress = min( 100, (int) round( ( $count / $count_target ) * 100 ) );
+		$mrr_progress   = min( 100, (int) round( ( $mrr / $mrr_target ) * 100 ) );
+
+		$chip_class = 'is-disabled';
+		$chip_label = __( 'NOT MET', 'uplinkportal' );
+		if ( 'approaching' === $gate_status ) {
+			$chip_class = 'is-warning';
+			$chip_label = __( 'APPROACHING', 'uplinkportal' );
+		} elseif ( 'met' === $gate_status ) {
+			$chip_class = 'is-enabled';
+			$chip_label = __( 'MET — Phase 1 hiring gate reached', 'uplinkportal' );
+		}
+		?>
+		<div class="uplinkportal-admin-card uplinkportal-hiring-gate">
+			<h2><?php echo esc_html__( 'Phase 1 Hiring Gate', 'uplinkportal' ); ?></h2>
+			<p class="description">
+				<?php echo esc_html__( 'Growth triggers for the first hire: 5 active recurring MSP clients, or $10,000 MRR sustained within the current month.', 'uplinkportal' ); ?>
+			</p>
+
+			<div class="uplinkportal-hiring-gate-metric">
+				<div class="uplinkportal-hiring-gate-metric-meta">
+					<span><?php echo esc_html__( 'Recurring MSP clients', 'uplinkportal' ); ?></span>
+					<span>
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: 1: current recurring client count, 2: target count. */
+								__( '%1$d / %2$d', 'uplinkportal' ),
+								$count,
+								$count_target
+							)
+						);
+						?>
+					</span>
+				</div>
+				<div class="uplinkportal-hiring-gate-track" role="progressbar" aria-valuenow="<?php echo esc_attr( (string) $count_progress ); ?>" aria-valuemin="0" aria-valuemax="100">
+					<span class="uplinkportal-hiring-gate-fill" style="width: <?php echo esc_attr( (string) $count_progress ); ?>%;"></span>
+				</div>
+			</div>
+
+			<div class="uplinkportal-hiring-gate-metric">
+				<div class="uplinkportal-hiring-gate-metric-meta">
+					<span><?php echo esc_html__( 'MRR', 'uplinkportal' ); ?></span>
+					<span>
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: 1: current MRR, 2: target MRR. */
+								__( '$%1$s / $%2$s', 'uplinkportal' ),
+								number_format_i18n( $mrr, 0 ),
+								number_format_i18n( $mrr_target, 0 )
+							)
+						);
+						?>
+					</span>
+				</div>
+				<div class="uplinkportal-hiring-gate-track" role="progressbar" aria-valuenow="<?php echo esc_attr( (string) $mrr_progress ); ?>" aria-valuemin="0" aria-valuemax="100">
+					<span class="uplinkportal-hiring-gate-fill" style="width: <?php echo esc_attr( (string) $mrr_progress ); ?>%;"></span>
+				</div>
+			</div>
+
+			<p>
+				<span class="uplinkportal-status-pill <?php echo esc_attr( $chip_class ); ?>">
+					<?php echo esc_html( $chip_label ); ?>
+				</span>
+			</p>
+
+			<?php if ( 'met' === $gate_status ) : ?>
+				<div class="notice notice-success inline">
+					<p><?php echo esc_html__( 'Phase 1 hiring gate reached. Review the department growth plan to begin the first hire.', 'uplinkportal' ); ?></p>
+				</div>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+
+	/**
 	 * Renders a single KPI card widget.
 	 *
 	 * @param array<string,string> $kpi KPI data array with keys: label, value, sub, indicator, indicator_dir.
@@ -273,16 +386,21 @@ class OperationsDashboardUi {
 	 * @return array<int,array<string,string>>
 	 */
 	private function get_executive_kpis(): array {
+		$recurring_count = $this->hiring_triggers->get_recurring_client_count();
+		$current_mrr     = $this->hiring_triggers->get_current_mrr();
+
 		$defaults = array(
 			array(
 				'label' => __( 'Active Clients', 'uplinkportal' ),
-				'value' => '—',
-				'sub'   => __( 'Requires integration', 'uplinkportal' ),
+				'value' => (string) $recurring_count,
+				'sub'   => __( 'Active recurring MSP clients', 'uplinkportal' ),
 			),
 			array(
 				'label' => __( 'MRR', 'uplinkportal' ),
-				'value' => '—',
-				'sub'   => __( 'Requires billing integration', 'uplinkportal' ),
+				'value' => '$' . number_format_i18n( $current_mrr, 0 ),
+				'sub'   => $current_mrr > 0
+					? __( 'From connected billing integration', 'uplinkportal' )
+					: __( 'Requires billing integration', 'uplinkportal' ),
 			),
 			array(
 				'label' => __( 'Open Tickets', 'uplinkportal' ),
