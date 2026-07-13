@@ -249,7 +249,16 @@ class ServiceContainer {
 	 * @return OperationsDashboardUi
 	 */
 	public function operations_dashboard_ui(): OperationsDashboardUi {
-		return $this->service( 'operations_dashboard_ui', fn() => new OperationsDashboardUi() );
+		return $this->service( 'operations_dashboard_ui', fn() => new OperationsDashboardUi( $this->hiring_trigger_service() ) );
+	}
+
+	/**
+	 * Returns hiring trigger metrics service.
+	 *
+	 * @return HiringTriggerService
+	 */
+	public function hiring_trigger_service(): HiringTriggerService {
+		return $this->service( 'hiring_trigger_service', fn() => new HiringTriggerService( $this->client_profiles() ) );
 	}
 
 	/**
