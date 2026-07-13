@@ -85,27 +85,27 @@ class ClientProfileStore {
 	 */
 	public function get_profile_schema(): array {
 		return array(
-			'company_name'  => array(
+			'company_name'    => array(
 				'label'       => __( 'Company Name', 'uplinkportal' ),
 				'description' => __( 'Client organization or company display name.', 'uplinkportal' ),
 			),
-			'department'    => array(
+			'department'      => array(
 				'label'       => __( 'Department', 'uplinkportal' ),
 				'description' => __( 'Primary internal department for the client user.', 'uplinkportal' ),
 			),
-			'title'         => array(
+			'title'           => array(
 				'label'       => __( 'Title', 'uplinkportal' ),
 				'description' => __( 'Role title shown to support and project teams.', 'uplinkportal' ),
 			),
-			'phone_number'  => array(
+			'phone_number'    => array(
 				'label'       => __( 'Phone Number', 'uplinkportal' ),
 				'description' => __( 'Primary phone number for client contact and notifications.', 'uplinkportal' ),
 			),
-			'email_address' => array(
+			'email_address'   => array(
 				'label'       => __( 'Email Address', 'uplinkportal' ),
 				'description' => __( 'Client profile contact email (may differ from WordPress account email).', 'uplinkportal' ),
 			),
-			'contract_type' => array(
+			'contract_type'   => array(
 				'label'       => __( 'Contract Type', 'uplinkportal' ),
 				'description' => __( 'Engagement type for hiring-trigger metrics: recurring, project, or none.', 'uplinkportal' ),
 			),
