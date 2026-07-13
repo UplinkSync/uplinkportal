@@ -110,3 +110,18 @@ Workflows:
 - [Configuration](docs/getting-started/configuration.md)
 - [Troubleshooting](docs/troubleshooting/index.md)
 - [Contributing](CONTRIBUTING.md)
+
+## CI/CD pipeline
+
+- **CI**: shared template from [`***`](https://***/***) — php lint, phpcs, phpunit (composer scripts), gitleaks, esbuild asset build, per-MR review app with the plugin active.
+- **Previews**: every MR gets a disposable WordPress at `https://<branch-slug>.***`
+  ("View app" on the MR; basic-auth credentials in Vault `***`).
+- **Merges**: `main` is protected; merging requires a green pipeline; humans merge, agents don't.
+- **GitHub**: CI-verified `main` auto-mirrors to [`github.com/irwindoug/uplinkportal`](https://github.com/irwindoug/uplinkportal), where GitHub Actions can deploy the plugin to a WordPress site once `REMOTE_PLUGIN_PATH` is configured.
+
+## Contributing
+
+Branch from `main` (Paperclip agents: `paperclip/<task-id>`), open an MR, let the pipeline
+run, use the preview link to check the result. Never commit literal secrets.
+
+Full runbook: `***` → `docs/103-detail-gitlab-github-hostinger-pipeline.md`.
