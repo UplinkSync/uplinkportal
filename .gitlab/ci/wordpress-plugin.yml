@@ -1,0 +1,10 @@
+# Shim: the repo's root .gitlab-ci.yml includes this local path. It pulls the
+# canonical pipeline from *** (validate -> build -> per-branch
+# review app). See ecosystem docs/103-detail-gitlab-github-hostinger-pipeline.md.
+include:
+  - project: '***'
+    ref: main
+    file: '/templates/wordpress-plugin.gitlab-ci.yml'
+
+variables:
+  PLUGIN_SLUG: "uplinkportal"

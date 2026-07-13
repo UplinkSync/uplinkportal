@@ -1,0 +1,103 @@
+# Deploy a WordPress plugin/theme OR a whole-site wp-content from GitHub to a
+# live WordPress host over SSH (Hostinger shared or any VPS).
+# Copy to <repo>/.github/workflows/deploy-wordpress.yml — committed on the
+# GITLAB side (the mirror force-syncs branches; GitHub-only commits get wiped).
+#
+# Repo secrets (Settings -> Secrets and variables -> Actions -> Secrets):
+#   HOSTINGER_SSH_HOST   deploy host (Hostinger shared IP or VPS IP)
+#   HOSTINGER_SSH_PORT   65002 on Hostinger shared, 22 on a VPS
+#   HOSTINGER_SSH_USER   e.g. u123456789 or a dedicated deploy user
+#   HOSTINGER_SSH_KEY    private key of the per-site deploy keypair (ed25519)
+# Repo variables:
+#   DEPLOY_MODE          "plugin" (default) or "site"
+#   REMOTE_PLUGIN_PATH   plugin mode: .../wp-content/plugins/<slug>
+#                        site mode:   .../wp-content   (the wp-content dir itself)
+#   WP_ROOT              WordPress root, for wp-cli activate/flush (optional)
+#   PLUGIN_SLUG          plugin mode only, for wp-cli activate (optional)
+#
+# Master credential copies live in Vault (*** secret/ai/tooling/*).
+#
+# Safety:
+#   plugin mode: rsync --delete, scoped strictly to the plugin dir under wp-content.
+#   site mode:   syncs the repo's wp-content/ over the live wp-content WITHOUT
+#                --delete, excluding uploads/caches/runtime files — live-only
+#                files survive; only files tracked in the repo are overwritten.
+#   The guard refuses REMOTE_PLUGIN_PATH values outside wp-content either way.
+
+name: Deploy to WordPress host
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-wordpress
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Stays silently skipped until REMOTE_PLUGIN_PATH is configured on the repo.
+    if: vars.REMOTE_PLUGIN_PATH != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate configuration
+        run: |
+          MODE="${{ vars.DEPLOY_MODE }}"
+          TARGET="${{ vars.REMOTE_PLUGIN_PATH }}"
+          if [ "$MODE" = "site" ]; then
+            case "$TARGET" in
+              */wp-content) echo "site mode, target OK" ;;
+              *) echo "site mode requires REMOTE_PLUGIN_PATH to end in /wp-content — refusing"; exit 1 ;;
+            esac
+            [ -d wp-content ] || { echo "repo has no wp-content/ directory — refusing"; exit 1; }
+          else
+            case "$TARGET" in
+              */wp-content/*) echo "plugin mode, target OK" ;;
+              *) echo "plugin mode requires REMOTE_PLUGIN_PATH under wp-content/ — refusing"; exit 1 ;;
+            esac
+          fi
+
+      - name: Set up SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${{ secrets.HOSTINGER_SSH_PORT }}" "${{ secrets.HOSTINGER_SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Build assets (if any)
+        run: |
+          if [ -f package.json ]; then
+            npm ci && npm run build --if-present
+          fi
+
+      - name: Deploy (plugin mode)
+        if: vars.DEPLOY_MODE != 'site'
+        run: |
+          rsync -az --delete \
+            --exclude '.git*' --exclude '.github' --exclude 'node_modules' \
+            --exclude 'tests' --exclude 'infrastructure' --exclude '.claude' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.HOSTINGER_SSH_PORT }}" \
+            ./ "${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}:${{ vars.REMOTE_PLUGIN_PATH }}/"
+
+      - name: Deploy (site mode — no deletions on live)
+        if: vars.DEPLOY_MODE == 'site'
+        run: |
+          rsync -az \
+            --exclude 'uploads/' --exclude 'upgrade/' --exclude 'upgrade-temp-backup/' \
+            --exclude 'cache/' --exclude 'litespeed/' --exclude 'boost-cache/' \
+            --exclude 'jetpack-waf/' --exclude 'jpcrm-storage/' \
+            --exclude 'object-cache.php' --exclude 'advanced-cache.php' \
+            --exclude '*.dat' --exclude '.git*' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.HOSTINGER_SSH_PORT }}" \
+            wp-content/ "${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}:${{ vars.REMOTE_PLUGIN_PATH }}/"
+
+      - name: Activate plugin / flush caches (best effort)
+        if: vars.WP_ROOT != ''
+        continue-on-error: true
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${{ secrets.HOSTINGER_SSH_PORT }}" \
+            "${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}" \
+            "command -v wp >/dev/null && cd '${{ vars.WP_ROOT }}' && { [ -n '${{ vars.PLUGIN_SLUG }}' ] && wp plugin activate '${{ vars.PLUGIN_SLUG }}'; wp cache flush; } || echo 'wp-cli not available; skipped'"
