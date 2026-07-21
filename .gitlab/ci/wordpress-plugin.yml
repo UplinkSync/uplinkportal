@@ -8,3 +8,86 @@ include:
 
 variables:
   PLUGIN_SLUG: "uplinkportal"
+
+# ---------------------------------------------------------------------------
+# ***-70: automated OSS license scan (SBOM inventory) — GPL-2.0-or-later
+# compatible licenses only, as required for WordPress plugin distribution.
+#
+# NOTE: These jobs live in the repo-local CI (not ***) on purpose.
+# The gate was authored against the shared template, but landing it there is
+# blocked (*** is not reachable by the CI/bot account). Keeping the
+# gate here makes it live in *this* pipeline now; it can be promoted into the
+# shared template later once template access is unblocked (see ***-70 thread).
+#
+# The `security` stage is defined by the included *** pipeline.
+# Apache-2.0 is allowed: WP plugins are "GPL-2.0-or-later", compatible via GPLv3.
+# ---------------------------------------------------------------------------
+license_scan_composer:
+  stage: security
+  image: composer:2
+  rules:
+    - exists: [composer.json]
+  script:
+    - mkdir -p policy-reports
+    - composer install --no-interaction --no-progress --no-scripts --no-plugins --no-dev
+    - composer licenses --no-dev -f json > policy-reports/composer-licenses.json
+    - |
+      php -r '
+        $allow = ["MIT","ISC","BSD-2-Clause","BSD-3-Clause","0BSD","Apache-2.0",
+          "GPL-2.0-only","GPL-2.0-or-later","GPL-3.0-only","GPL-3.0-or-later",
+          "LGPL-2.1-only","LGPL-2.1-or-later","LGPL-3.0-only","LGPL-3.0-or-later",
+          "MPL-2.0","Zlib","Unlicense","CC0-1.0","WTFPL","Artistic-2.0","Python-2.0"];
+        $data = json_decode(file_get_contents("policy-reports/composer-licenses.json"), true);
+        $bad = [];
+        foreach (($data["dependencies"] ?? []) as $pkg => $info) {
+          $lics = (array) ($info["license"] ?? []);
+          if (!array_intersect($lics, $allow)) $bad[$pkg] = implode(", ", $lics) ?: "(none)";
+        }
+        foreach ($bad as $p => $l) fwrite(STDERR, "DISALLOWED: $p [$l]\n");
+        exit($bad ? 1 : 0);
+      '
+    - echo "PASS composer license gate"
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths: [policy-reports/composer-licenses.json]
+
+# Covers root package.json and nested manifests (e.g. infrastructure/worker).
+license_scan_npm:
+  stage: security
+  image: node:22-alpine
+  rules:
+    - exists: [package.json]
+  variables:
+    NPM_LICENSE_ALLOWLIST: >-
+      MIT;ISC;BSD-2-Clause;BSD-3-Clause;0BSD;Apache-2.0;
+      GPL-2.0-only;GPL-2.0-or-later;GPL-3.0-only;GPL-3.0-or-later;
+      LGPL-2.1-only;LGPL-2.1-or-later;LGPL-3.0-only;LGPL-3.0-or-later;
+      MPL-2.0;Zlib;Unlicense;CC0-1.0;WTFPL;Artistic-2.0;Python-2.0;
+      BlueOak-1.0.0;CC-BY-3.0;CC-BY-4.0
+  script:
+    - mkdir -p policy-reports
+    - ALLOW="$(echo "$NPM_LICENSE_ALLOWLIST" | tr -d ' \n')"
+    - |
+      fail=0
+      for lock in $(find . -name package-lock.json -not -path '*/node_modules/*' -not -path './vendor/*'); do
+        dir="$(dirname "$lock")"
+        slug="$(echo "${dir#./}" | tr '/' '-')"; [ "$slug" = "." ] && slug=root
+        echo "== npm license scan: $dir"
+        (cd "$dir" && npm ci --ignore-scripts --no-audit --no-fund) || { fail=1; continue; }
+        # --excludePrivatePackages: the workspace's own package.json files are
+        # "private": true with no license field, so license-checker reports them
+        # as UNLICENSED and fails the gate on OUR code rather than a dependency.
+        # Private packages are never distributed, so their licence is out of
+        # scope for an OSS-compliance gate. Third-party deps are still checked.
+        npx --yes license-checker --production --start "$dir" \
+          --excludePrivatePackages \
+          --json --out "policy-reports/npm-licenses-$slug.json" \
+          --onlyAllow "$ALLOW" || fail=1
+      done
+      [ "$fail" -eq 0 ] && echo "PASS npm license gate"
+      exit "$fail"
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths: [policy-reports/npm-licenses-*.json]
