@@ -183,6 +183,7 @@ class UplinkPortal_Main_Module extends UplinkPortal_Base_Module {
 		$this->evidence_trail_store->register_hooks();
 		$this->central_audit_journal = $this->service_container->central_audit_journal();
 		$this->central_audit_journal->register_hooks();
+		$this->service_container->mrr_provider()->register_hooks();
 		$this->licensing_client = $this->service_container->licensing_client();
 		$this->module_manager   = $this->service_container->module_manager();
 		$this->settings_page    = $this->service_container->settings_page();
