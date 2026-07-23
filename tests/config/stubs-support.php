@@ -213,6 +213,29 @@ if ( ! function_exists( __NAMESPACE__ . '\\apply_filters' ) ) {
 	}
 }
 
+if ( ! function_exists( __NAMESPACE__ . '\\add_filter' ) ) {
+	/**
+	 * Minimal add_filter stub for tests — registers into the same global the
+	 * apply_filters stub reads from. Priority and arg count are ignored.
+	 *
+	 * @param string   $hook Hook name.
+	 * @param callable $callback Callback.
+	 * @param int      $priority Priority (ignored in stubs).
+	 * @param int      $accepted_args Accepted args (ignored in stubs).
+	 * @return bool
+	 */
+	function add_filter( string $hook, callable $callback, int $priority = 10, int $accepted_args = 1 ): bool {
+		if ( ! isset( $GLOBALS['uplinkportal_test_filters'][ $hook ] ) ) {
+			$GLOBALS['uplinkportal_test_filters'][ $hook ] = array();
+		} elseif ( ! is_array( $GLOBALS['uplinkportal_test_filters'][ $hook ] ) ) {
+			$GLOBALS['uplinkportal_test_filters'][ $hook ] = array( $GLOBALS['uplinkportal_test_filters'][ $hook ] );
+		}
+
+		$GLOBALS['uplinkportal_test_filters'][ $hook ][] = $callback;
+		return true;
+	}
+}
+
 if ( ! function_exists( __NAMESPACE__ . '\\is_uploaded_file' ) ) {
 	/**
 	 * Minimal is_uploaded_file stub for tests — always returns true for non-empty paths.

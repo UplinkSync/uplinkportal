@@ -262,6 +262,15 @@ class ServiceContainer {
 	}
 
 	/**
+	 * Returns the hiring-gate MRR provider.
+	 *
+	 * @return MrrProvider
+	 */
+	public function mrr_provider(): MrrProvider {
+		return $this->service( 'mrr_provider', fn() => new MrrProvider() );
+	}
+
+	/**
 	 * Returns Agreements & Records UI renderer.
 	 *
 	 * @return AgreementsRecordsUi
