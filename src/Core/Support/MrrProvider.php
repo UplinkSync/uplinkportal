@@ -12,20 +12,16 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Supplies live monthly recurring revenue to `uplinkportal_hiring_trigger_mrr`.
  *
+ * Per owner decision (Doug, 2026-07-28) the single source of truth for MRR is
+ * active WooCommerce Subscriptions. No manual/interim entry is used.
+ *
  * Source chain, first match wins:
  * 1. A value already supplied by an earlier billing integration on the filter
- *    (e.g. WooClover Sync hooking before priority 10).
+ *    (e.g. WooClover Sync hooking before priority 10). Standard filter-chain
+ *    courtesy so an authoritative upstream value is never discarded.
  * 2. Active WooCommerce Subscriptions, normalized to a monthly amount.
- * 3. The `uplinkportal_manual_mrr` option — an MSP-entered interim value.
  */
 class MrrProvider {
-
-	/**
-	 * Option storing the MSP-entered interim MRR (USD).
-	 *
-	 * @var string
-	 */
-	public const MANUAL_MRR_OPTION = 'uplinkportal_manual_mrr';
 
 	/**
 	 * Filter priority; billing integrations hooking earlier take precedence.
@@ -66,26 +62,17 @@ class MrrProvider {
 			return (float) $mrr;
 		}
 
-		$subscriptions_mrr = $this->get_subscriptions_mrr();
-		if ( $subscriptions_mrr > 0.0 ) {
-			return $subscriptions_mrr;
-		}
-
-		return $this->get_manual_mrr();
+		return $this->get_subscriptions_mrr();
 	}
 
 	/**
 	 * Returns the machine key of the source currently supplying MRR.
 	 *
-	 * @return string 'integration', 'woocommerce_subscriptions', 'manual', or 'none'.
+	 * @return string 'woocommerce_subscriptions' or 'none'.
 	 */
 	public function get_active_source(): string {
 		if ( $this->get_subscriptions_mrr() > 0.0 ) {
 			return 'woocommerce_subscriptions';
-		}
-
-		if ( $this->get_manual_mrr() > 0.0 ) {
-			return 'manual';
 		}
 
 		return 'none';
@@ -140,16 +127,5 @@ class MrrProvider {
 		);
 
 		return is_array( $subscriptions ) ? array_values( $subscriptions ) : array();
-	}
-
-	/**
-	 * Returns the MSP-entered interim MRR option value.
-	 *
-	 * @return float
-	 */
-	private function get_manual_mrr(): float {
-		$value = get_option( self::MANUAL_MRR_OPTION, 0 );
-
-		return is_numeric( $value ) ? max( 0.0, (float) $value ) : 0.0;
 	}
 }

@@ -156,25 +156,15 @@ class MrrProviderTest extends TestCase {
 		$this->assertSame( 250.0, $provider->filter_mrr( 0.0 ) );
 	}
 	/**
-	 * Ensures the manual option is the fallback and non-numeric values clamp to zero.
+	 * Ensures MRR resolves to zero with no active subscriptions (no interim source).
 	 *
 	 * @return void
 	 */
-	public function test_manual_option_fallback_and_sanitization(): void {
+	public function test_no_subscriptions_resolves_to_zero(): void {
 		$provider = $this->make_provider();
 
 		$this->assertSame( 0.0, $provider->filter_mrr( 0.0 ) );
 		$this->assertSame( 'none', $provider->get_active_source() );
-
-		$GLOBALS['uplinkportal_test_wp_options'][ MrrProvider::MANUAL_MRR_OPTION ] = '4200.75';
-		$this->assertSame( 4200.75, $provider->filter_mrr( 0.0 ) );
-		$this->assertSame( 'manual', $provider->get_active_source() );
-
-		$GLOBALS['uplinkportal_test_wp_options'][ MrrProvider::MANUAL_MRR_OPTION ] = 'not-a-number';
-		$this->assertSame( 0.0, $provider->filter_mrr( 0.0 ) );
-
-		$GLOBALS['uplinkportal_test_wp_options'][ MrrProvider::MANUAL_MRR_OPTION ] = -900;
-		$this->assertSame( 0.0, $provider->filter_mrr( 0.0 ) );
 	}
 
 	/**
