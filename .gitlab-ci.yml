@@ -1,7 +1,16 @@
+# Single source of truth: the shared WordPress-plugin pipeline lives in
+# *** (validate -> security -> build -> per-branch review app).
+# It carries the OSS license gate (composer + npm, --excludePrivatePackages)
+# promoted from this repo's former local copy in ***-70 (see ***-121).
+# Do NOT re-add a local /.gitlab/ci/wordpress-plugin.yml — extend the shared
+# template in *** so there is no drift.
 include:
-  - local: '/.gitlab/ci/wordpress-plugin.yml'
+  - project: '***'
+    ref: main
+    file: '/templates/wordpress-plugin.gitlab-ci.yml'
 
 variables:
+  PLUGIN_SLUG: "uplinkportal"
   VAULT_ROLE: "wp-plugin-uplinkportal"
   GITHUB_ORG: "irwindoug"
   GITHUB_REPO: "uplinkportal"
