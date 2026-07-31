@@ -73,6 +73,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pro placeholder interfaces/classes (no premium logic).
 - Public-core-policy documentation.
 
-[Unreleased]: https://github.com/example/uplinkportal/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/example/uplinkportal/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/example/uplinkportal/releases/tag/v0.1.0
+[Unreleased]: https://github.com/UplinkSync/uplinkportal/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/UplinkSync/uplinkportal/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/UplinkSync/uplinkportal/releases/tag/v0.1.0

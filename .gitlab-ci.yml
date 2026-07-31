@@ -1,9 +1,8 @@
-# Single source of truth: the shared WordPress-plugin pipeline lives in
-# *** (validate -> security -> build -> per-branch review app).
-# It carries the OSS license gate (composer + npm, --excludePrivatePackages)
-# promoted from this repo's former local copy in ***-70 (see ***-121).
-# Do NOT re-add a local /.gitlab/ci/wordpress-plugin.yml — extend the shared
-# template in *** so there is no drift.
+# Single source of truth: this project extends the shared WordPress-plugin CI
+# pipeline (validate -> security -> build -> per-branch review app), which also
+# carries the OSS license gate (composer + npm). Do NOT re-add a local
+# /.gitlab/ci/wordpress-plugin.yml — extend the shared template so there is no
+# drift.
 include:
   - project: 'ops/ci-templates'
     ref: main
@@ -12,6 +11,6 @@ include:
 variables:
   PLUGIN_SLUG: "uplinkportal"
   VAULT_ROLE: "wp-plugin-uplinkportal"
-  GITHUB_ORG: "irwindoug"
+  GITHUB_ORG: "UplinkSync"
   GITHUB_REPO: "uplinkportal"
   SQUASH_COMMIT_PREFIX: "release"

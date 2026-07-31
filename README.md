@@ -74,6 +74,11 @@ Portal preview customization is stored in a private directory (not in public upl
 - Store: `src/Core/Support/PortalCustomizationStore.php`
 - Path: `wp-content/uplinkportal-private/portal-preview/`
 
+## Screenshots
+
+<!-- TODO: add Operations Dashboard, Configuration hub, and Client Portal
+     screenshots here. Source imagery lives in assets/img/. -->
+
 ## Development
 
 Requirements:
@@ -111,17 +116,26 @@ Workflows:
 - [Troubleshooting](docs/troubleshooting/index.md)
 - [Contributing](CONTRIBUTING.md)
 
-## CI/CD pipeline
+## CI/CD
 
-- **CI**: shared template from [`***`](https://***/***) — php lint, phpcs, phpunit (composer scripts), gitleaks, esbuild asset build, per-MR review app with the plugin active.
-- **Previews**: every MR gets a disposable WordPress at `https://<branch-slug>.***`
-  ("View app" on the MR; basic-auth credentials in Vault `***`).
-- **Merges**: `main` is protected; merging requires a green pipeline; humans merge, agents don't.
-- **GitHub**: CI-verified `main` auto-mirrors to [`github.com/irwindoug/uplinkportal`](https://github.com/irwindoug/uplinkportal), where GitHub Actions can deploy the plugin to a WordPress site once `REMOTE_PLUGIN_PATH` is configured.
+- **CI (GitHub Actions):** PHP lint, Composer lint (PHPCS + cspell), PHPUnit, and
+  a repository hygiene scan (secret + public-core boundary checks) run on every
+  push and pull request. See `.github/workflows/ci.yml`.
+- **Releases:** `.github/workflows/release-plugin.yml` packages tagged builds.
+- **Database & worker:** `.github/workflows/db-migrate.yml` and
+  `.github/workflows/deploy-worker.yml` provision the Supabase schema and the
+  Cloudflare Worker used by entitlement-backed features.
+
+`main` is protected: changes land through pull requests that must pass CI before
+they can be merged.
 
 ## Contributing
 
-Branch from `main` (Paperclip agents: `paperclip/<task-id>`), open an MR, let the pipeline
-run, use the preview link to check the result. Never commit literal secrets.
+Branch from `main`, open a pull request, and let CI run. Add tests for behavior
+changes and keep the public-core boundary intact (no proprietary/entitlement
+logic in this repository). Never commit literal secrets — use CI secrets and a
+runtime secret manager.
 
-Full runbook: `***` → `docs/103-detail-gitlab-github-hostinger-pipeline.md`.
+## License
+
+Distributed under the terms of the [AGPL-3.0-or-later](LICENSE) license.
