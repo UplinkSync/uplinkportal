@@ -5,7 +5,7 @@
 # Do NOT re-add a local /.gitlab/ci/wordpress-plugin.yml — extend the shared
 # template in *** so there is no drift.
 include:
-  - project: '***'
+  - project: 'ops/ci-templates'
     ref: main
     file: '/templates/wordpress-plugin.gitlab-ci.yml'
 
