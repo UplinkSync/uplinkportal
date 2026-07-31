@@ -178,6 +178,23 @@ class MrrProviderTest extends TestCase {
 	}
 
 	/**
+	 * Ensures a free subscriptions plugin can supply rows via the
+	 * `uplinkportal_woocommerce_subscriptions` filter when the paid extension's
+	 * `wcs_get_subscriptions()` is absent (owner decision 2026-07-30).
+	 *
+	 * @return void
+	 */
+	public function test_free_plugin_supplies_subscriptions_via_filter(): void {
+		$provider = new MrrProvider();
+
+		$GLOBALS['uplinkportal_test_filters']['uplinkportal_woocommerce_subscriptions'] =
+			fn() => array( $this->make_subscription( 750.0, 'month', 1 ) );
+
+		$this->assertSame( 750.0, $provider->filter_mrr( 0.0 ) );
+		$this->assertSame( 'woocommerce_subscriptions', $provider->get_active_source() );
+	}
+
+	/**
 	 * Ensures a registered provider feeds live MRR through the real filter path
 	 * and advances the sustained-month gate option.
 	 *

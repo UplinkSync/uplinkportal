@@ -15,7 +15,10 @@ defined( 'ABSPATH' ) || exit;
  * Source chain, first match wins:
  * 1. A value already supplied by an earlier billing integration on the filter
  *    (e.g. WooClover Sync hooking before priority 10).
- * 2. Active WooCommerce Subscriptions, normalized to a monthly amount.
+ * 2. Active WooCommerce Subscriptions — the owner-designated source of truth
+ *    (decision 2026-07-30) — normalized to a monthly amount. Rows come from the
+ *    paid extension's `wcs_get_subscriptions()` when present, or from the
+ *    `uplinkportal_woocommerce_subscriptions` filter (free plugin / adapter).
  * 3. The `uplinkportal_manual_mrr` option — an MSP-entered interim value.
  */
 class MrrProvider {
@@ -122,22 +125,41 @@ class MrrProvider {
 	}
 
 	/**
-	 * Returns active WooCommerce Subscription objects, or an empty array when
-	 * WooCommerce Subscriptions is not installed. Overridable for tests.
+	 * Returns active subscription objects for the MRR sum. Overridable for tests.
+	 *
+	 * WooCommerce Subscriptions is the source of truth (owner decision
+	 * 2026-07-30). The paid extension's `wcs_get_subscriptions()` is used when
+	 * present, but the result is passed through the
+	 * `uplinkportal_woocommerce_subscriptions` filter so a free subscriptions
+	 * plugin — or any billing adapter — can supply the active-subscription rows
+	 * instead. Each row must expose `get_total()`, `get_billing_period()`, and
+	 * `get_billing_interval()`; rows missing those accessors are skipped.
 	 *
 	 * @return array<int,object>
 	 */
 	protected function get_active_woocommerce_subscriptions(): array {
-		if ( ! function_exists( 'wcs_get_subscriptions' ) ) {
-			return array();
+		$subscriptions = array();
+
+		if ( function_exists( 'wcs_get_subscriptions' ) ) {
+			$result        = \wcs_get_subscriptions(
+				array(
+					'subscription_status'    => 'active',
+					'subscriptions_per_page' => -1,
+				)
+			);
+			$subscriptions = is_array( $result ) ? array_values( $result ) : array();
 		}
 
-		$subscriptions = \wcs_get_subscriptions(
-			array(
-				'subscription_status'    => 'active',
-				'subscriptions_per_page' => -1,
-			)
-		);
+		/**
+		 * Filters the active subscription rows summed into MRR.
+		 *
+		 * Lets a free WooCommerce Subscriptions plugin or billing adapter supply
+		 * rows when the paid extension is absent. Each row must expose
+		 * `get_total()`, `get_billing_period()`, and `get_billing_interval()`.
+		 *
+		 * @param array<int,object> $subscriptions Active subscription objects.
+		 */
+		$subscriptions = apply_filters( 'uplinkportal_woocommerce_subscriptions', $subscriptions );
 
 		return is_array( $subscriptions ) ? array_values( $subscriptions ) : array();
 	}
