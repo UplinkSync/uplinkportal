@@ -387,3 +387,45 @@ if ( ! function_exists( __NAMESPACE__ . '\\wp_parse_args' ) ) {
 		return array_merge( (array) $defaults, (array) $args );
 	}
 }
+
+if ( ! function_exists( __NAMESPACE__ . '\\post_type_exists' ) ) {
+	/**
+	 * Minimal post_type_exists stub reading a test global registry.
+	 *
+	 * @param string $post_type Post type slug.
+	 * @return bool
+	 */
+	function post_type_exists( string $post_type ): bool {
+		$registered = $GLOBALS['uplinkportal_test_post_types'] ?? array();
+		return in_array( $post_type, (array) $registered, true );
+	}
+}
+
+if ( ! function_exists( __NAMESPACE__ . '\\get_posts' ) ) {
+	/**
+	 * Minimal get_posts stub returning IDs from a test global registry.
+	 *
+	 * @param array<string,mixed> $args Query args.
+	 * @return array<int,int>
+	 */
+	function get_posts( array $args = array() ) {
+		$post_type = (string) ( $args['post_type'] ?? '' );
+		$posts     = $GLOBALS['uplinkportal_test_posts'][ $post_type ] ?? array();
+		return array_map( 'intval', array_keys( (array) $posts ) );
+	}
+}
+
+if ( ! function_exists( __NAMESPACE__ . '\\get_post_meta' ) ) {
+	/**
+	 * Minimal get_post_meta stub reading a test global registry.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $key     Meta key.
+	 * @param bool   $single  Single value flag.
+	 * @return mixed
+	 */
+	function get_post_meta( int $post_id, string $key = '', bool $single = false ) {
+		$meta = $GLOBALS['uplinkportal_test_post_meta'][ $post_id ] ?? array();
+		return $meta[ $key ] ?? '';
+	}
+}

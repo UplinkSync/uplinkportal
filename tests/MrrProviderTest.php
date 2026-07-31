@@ -23,6 +23,9 @@ class MrrProviderTest extends TestCase {
 		parent::setUp();
 		$GLOBALS['uplinkportal_test_wp_options'] = array();
 		$GLOBALS['uplinkportal_test_filters']    = array();
+		$GLOBALS['uplinkportal_test_post_types'] = array();
+		$GLOBALS['uplinkportal_test_posts']      = array();
+		$GLOBALS['uplinkportal_test_post_meta']  = array();
 	}
 
 	/**
@@ -192,6 +195,55 @@ class MrrProviderTest extends TestCase {
 
 		$this->assertSame( 750.0, $provider->filter_mrr( 0.0 ) );
 		$this->assertSame( 'woocommerce_subscriptions', $provider->get_active_source() );
+	}
+
+	/**
+	 * Ensures the built-in free-plugin adapter reads active subscriptions from an
+	 * installed free plugin (WebToffee) and normalizes them to monthly USD when
+	 * the paid `wcs_get_subscriptions()` is absent (***-406).
+	 *
+	 * @return void
+	 */
+	public function test_free_plugin_adapter_reads_installed_subscriptions(): void {
+		$GLOBALS['uplinkportal_test_post_types'] = array( 'subscrpt_order' );
+		$GLOBALS['uplinkportal_test_posts']      = array(
+			'subscrpt_order' => array(
+				101 => true,
+				102 => true,
+			),
+		);
+		$GLOBALS['uplinkportal_test_post_meta']  = array(
+			101 => array(
+				'_subscrpt_recurring_amount' => '1000',
+				'_subscrpt_timing_per'       => 'month',
+				'_subscrpt_timing_option'    => '1',
+			),
+			102 => array(
+				'_subscrpt_recurring_amount' => '1200',
+				'_subscrpt_timing_per'       => 'year',
+				'_subscrpt_timing_option'    => '1',
+			),
+		);
+
+		$provider = new MrrProvider();
+
+		$this->assertEqualsWithDelta( 1000.0 + 100.0, $provider->filter_mrr( 0.0 ), 0.001 );
+		$this->assertSame( 'woocommerce_subscriptions', $provider->get_active_source() );
+	}
+
+	/**
+	 * Ensures the free-plugin adapter is skipped when no supported plugin is
+	 * installed, so the manual option remains the fallback.
+	 *
+	 * @return void
+	 */
+	public function test_free_plugin_adapter_absent_falls_back_to_manual(): void {
+		$GLOBALS['uplinkportal_test_wp_options'][ MrrProvider::MANUAL_MRR_OPTION ] = '3300';
+
+		$provider = new MrrProvider();
+
+		$this->assertSame( 3300.0, $provider->filter_mrr( 0.0 ) );
+		$this->assertSame( 'manual', $provider->get_active_source() );
 	}
 
 	/**
